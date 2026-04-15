@@ -1,0 +1,16 @@
+@implements IDisposable
+@inject GameState Game
+
+<span class="connection-badge @(IsConnected ? "connected" : "disconnected")">
+    @(IsConnected ? "● Connected" : "● Disconnected") — @Game.TeamName
+</span>
+
+@code {
+    private bool IsConnected => Game.ConnectionState == Microsoft.AspNetCore.SignalR.Client.HubConnectionState.Connected;
+
+    protected override void OnInitialized() => Game.StateChanged += OnStateChanged;
+
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
+
+    public void Dispose() => Game.StateChanged -= OnStateChanged;
+}

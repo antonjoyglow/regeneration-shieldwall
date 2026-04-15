@@ -1,0 +1,272 @@
+@page "/"
+@using ShieldWall.Shared.Enums
+@inject GameState Game
+@implements IDisposable
+
+@if (Game.CurrentGamePhase == GamePhase.Lobby)
+{
+    <div class="state-overlay">
+        <h2>&#x1F6E1;&#xFE0F; Operation Shield Wall</h2>
+        <p>Connected as <strong>@Game.TeamName</strong>. Waiting for Game Master to begin&hellip;</p>
+    </div>
+}
+else if (Game.CurrentGamePhase == GamePhase.Briefing)
+{
+    if (_briefingPage == 0)
+    {
+        <div class="state-overlay briefing">
+            <h2>&#x1F6E1;&#xFE0F; Operation Shield Wall</h2>
+
+            <div class="briefing-narrative">
+                <h3>&#x1F30D; The World</h3>
+                <p>
+                    You work at the <span class="highlight">Sentinel Operations Center</span> &mdash;
+                    a joint tactical facility that monitors cyber, perimeter, and signals threats
+                    across multiple defence sectors. Your team runs a real-time detection pipeline
+                    called <strong>Sentinel</strong> that ingests thousands of alerts every hour.
+                </p>
+
+                <h3>&#x2694;&#xFE0F; The Problem</h3>
+                <p>
+                    Intel has flagged an <span class="danger">imminent coordinated attack</span>.
+                    But the current Sentinel pipeline has critical blind spots: it trusts every
+                    sensor equally, over-escalates on raw severity alone, and has
+                    <em>no ability</em> to spot coordinated attack patterns. When the alert stream
+                    hits, the operators using your pipeline will be overwhelmed with false escalations.
+                </p>
+
+                <h3>&#x1F3AF; Your Mission</h3>
+                <p>
+                    You are the <span class="highlight">engineering team</span> behind Sentinel.
+                    You have access to the pipeline source code &mdash; three files that control
+                    how alerts are classified, how actions are decided, and how patterns are detected.
+                    Fix the logic <em>before</em> the Game Master starts the alert stream.
+                    Once it starts, your code runs live. Better decisions = higher mission effectiveness score.
+                </p>
+
+                <p style="text-align: center;">
+                    <button class="btn-next" @onclick="GoToTechnicalBriefing">
+                        Mission Briefing &#x2192;
+                    </button>
+                </p>
+            </div>
+        </div>
+    }
+    else
+    {
+    <div class="state-overlay briefing briefing-full">
+        <h2>&#x1F4CB; Mission Briefing</h2>
+        <p class="briefing-subtitle">Your code classifies incoming alerts and decides what to do with them. Better decisions = higher score.</p>
+
+        <div class="briefing-scroll">
+
+            @* ── KNOW YOUR DATA ────────────────────────────────────── *@
+            <section class="briefing-section">
+                <h3>&#x1F50D; Know Your Data</h3>
+                <p>Every alert carries these three key fields. The starter code only uses the first one.</p>
+                <div class="briefing-table-wrap">
+                <table class="briefing-table">
+                    <thead>
+                        <tr><th>Field</th><th>What It Means</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>RawSeverity</code> <span class="dim">(1&ndash;10)</span></td>
+                            <td>How severe the source reports this alert to be</td>
+                        </tr>
+                        <tr>
+                            <td><code>ConfidenceScore</code> <span class="dim">(0.0&ndash;1.0)</span></td>
+                            <td>How trustworthy this reading is. Low = unreliable sensor.</td>
+                        </tr>
+                        <tr>
+                            <td><code>CorrelationGroup</code></td>
+                            <td>Alerts sharing this value may be part of the same coordinated attack</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div class="briefing-callout">
+                    <strong>&#x1F4A1;</strong> A severity-9 alert with confidence 0.15 is <em>not</em> the same as
+                    severity-9 with confidence 0.95. The starter code treats them identically.
+                </div>
+            </section>
+
+            @* ── ENGINEERING REFERENCE ─────────────────────────────── *@
+            <section class="briefing-section">
+                <h3>&#x1F4DA; How the Real World Does It</h3>
+                <p>
+                    These are the engineering concepts behind the three files you&rsquo;ll work on.
+                    The goal isn&rsquo;t to copy a formula &mdash; it&rsquo;s to <strong>understand the trade-off</strong>
+                    and pick an approach that fits.
+                </p>
+
+                <h4>Classification &mdash; Weighted Scoring</h4>
+                <p>
+                    In signal processing and medical diagnostics, raw measurements are rarely trusted at face value.
+                    A <strong>weighted composite score</strong> combines the measurement with
+                    a reliability factor &mdash; think of it like <em>&ldquo;what the sensor says&rdquo;</em>
+                    tempered by <em>&ldquo;how much we trust the sensor&rdquo;</em>.
+                    The key design question is: <strong>what happens when a high reading meets low reliability?</strong>
+                    Should it stay high? Drop to medium? Become noise?
+                    There is no single right formula &mdash; but ignoring reliability entirely is always wrong.
+                </p>
+                <div class="briefing-think">
+                    <strong>Real-world parallel:</strong> Hospital triage doesn&rsquo;t just look at
+                    heart rate (the severity). It considers whether the monitor was properly attached
+                    (the confidence). A 200&nbsp;bpm reading from a loose sensor
+                    gets re-checked, not an emergency response.
+                </div>
+
+                <h4>Pattern Detection &mdash; Correlation Analysis</h4>
+                <p>
+                    Cybersecurity SOCs (Security Operations Centers) and air-traffic control
+                    both use <strong>correlation rules</strong>: when multiple independent events share
+                    a common attribute within a time window, they may be a single coordinated incident.
+                    This is different from classifying each event alone &mdash; you&rsquo;re looking for
+                    <em>relationships across events</em>.
+                    The standard approach: <strong>group by a shared key, count per group, flag groups
+                    that exceed a threshold.</strong>
+                </p>
+                <div class="briefing-think">
+                    <strong>Real-world parallel:</strong> One shoplifting alert is a petty crime.
+                    Five shoplifting alerts from different stores in the same mall within 10 minutes?
+                    That&rsquo;s organized retail theft &mdash; a <em>pattern</em>, not five independent incidents.
+                    The shared attribute (mall + time window) is what turns singles into a group.
+                </div>
+
+                <h4>Response Engine &mdash; Cost-Asymmetric Decision Making</h4>
+                <p>
+                    In rule-based decision systems &mdash; from spam filters to fraud detection &mdash;
+                    not all mistakes are equal. <strong>Missing a real threat</strong> (under-escalation)
+                    is catastrophically more expensive than <strong>raising a false alarm</strong> (over-escalation).
+                    But flooding the response team with false alarms causes <em>alert fatigue</em>,
+                    which paradoxically <em>increases</em> the chance of missing real threats.
+                    The art is in the <strong>decision matrix</strong>: when to escalate, when to monitor, and
+                    when you&rsquo;re confident enough to dismiss.
+                </p>
+                <div class="briefing-think">
+                    <strong>Real-world parallel:</strong> Airport security. If you escalate every bag for
+                    manual inspection, the checkpoint grinds to a halt and screeners stop paying attention.
+                    If you dismiss too aggressively, threats get through. The goal: <em>escalate what matters,
+                    dismiss what clearly doesn&rsquo;t, monitor the uncertain middle.</em>
+                </div>
+            </section>
+
+            @* ── FILE 1: AlertClassifier ───────────────────────────── *@
+            <section class="briefing-section">
+                <h3>&#x1F5C2;&#xFE0F; <code>AlertClassifier.cs</code> <span class="tag tag-start">Start Here</span></h3>
+                <p>Assigns a threat level: <code>Critical</code> / <code>High</code> / <code>Medium</code> / <code>Low</code> / <code>Noise</code>.</p>
+                <p><strong>The problem:</strong> Uses only <code>RawSeverity</code>. Ignores <code>ConfidenceScore</code> completely.
+                    A faulty sensor screaming severity 10 with confidence 0.1 is classified as Critical.</p>
+                <div class="briefing-think">
+                    <strong>Hint:</strong> How should confidence change what you think about severity?
+                </div>
+            </section>
+
+            @* ── FILE 2: PatternDetector ───────────────────────────── *@
+            <section class="briefing-section">
+                <h3>&#x1F517; <code>PatternDetector.cs</code> <span class="tag tag-bonus">Bonus Points</span></h3>
+                <p>Looks at recent alerts and identifies coordinated attacks (compound threats).</p>
+                <p><strong>The problem:</strong> Empty. Returns nothing. You earn no bonus for detecting compound threats.</p>
+                <div class="briefing-think">
+                    <strong>Hint:</strong> Check the <code>CorrelationGroup</code> field. Alerts that share it belong together.
+                </div>
+            </section>
+
+            @* ── FILE 3: ResponseEngine ────────────────────────────── *@
+            <section class="briefing-section">
+                <h3>&#x26A1; <code>ResponseEngine.cs</code> <span class="tag tag-impact">High Impact</span></h3>
+                <p>Decides for each alert: <code>Dismiss</code>, <code>Monitor</code>, or <code>Escalate</code>.</p>
+                <p><strong>The problem:</strong> Escalates everything Medium or above. Never dismisses anything &mdash; even obvious noise.</p>
+                <div class="briefing-think">
+                    <strong>Hint:</strong> Dismissing real noise earns <em>bonus</em> points.
+                    Over-escalating costs you. Under-escalating costs you <em>more</em>.
+                </div>
+            </section>
+
+            @* ── SCORING HINTS ─────────────────────────────────────── *@
+            <section class="briefing-section">
+                <h3>&#x1F4CA; Scoring</h3>
+                <ul class="briefing-scoring">
+                    <li><strong>Classification accuracy</strong> is the biggest factor. Exact match = full credit. One level off = partial. Two off = zero.</li>
+                    <li><strong>Action correctness</strong> matters almost as much. Under-escalation is the most expensive mistake.</li>
+                    <li><strong>Speed</strong> is a multiplier. Get your logic right <em>before</em> the stream starts.</li>
+                </ul>
+            </section>
+
+            @* ── ATTACK PLAN ───────────────────────────────────────── *@
+            <section class="briefing-section">
+                <h3>&#x1F3AF; Recommended Order</h3>
+                <ol class="briefing-plan">
+                    <li><strong>First:</strong> <code>AlertClassifier.cs</code> &mdash; make confidence count.</li>
+                    <li><strong>Second:</strong> <code>ResponseEngine.cs</code> &mdash; stop over-escalating, start dismissing noise.</li>
+                    <li><strong>Third:</strong> <code>PatternDetector.cs</code> &mdash; detect correlated alerts for bonus points.</li>
+                </ol>
+                <div class="briefing-callout caution">
+                    <strong>&#x26A0;&#xFE0F;</strong> Don&rsquo;t touch <code>AlertPipeline.cs</code> or <code>SentinelConnection.cs</code>
+                    &mdash; they&rsquo;re wired correctly. Changing them may break your connection.
+                </div>
+            </section>
+
+            <p class="briefing-footer">Alert stream starts when the Game Master gives the order. Good luck, operators. &#x1F6E1;&#xFE0F;</p>
+
+            <div style="display: flex; justify-content: center; margin-top: 1rem;">
+                <button class="btn-back" @onclick="GoToNarrativeIntro">
+                    &#x2190; Back to Overview
+                </button>
+            </div>
+
+        </div>
+    </div>
+    }
+}
+else if (Game.CurrentGamePhase == GamePhase.Completed)
+{
+    <div class="state-overlay completed">
+        <h2>&#x1F3C6; Mission Complete</h2>
+        <p>Final score: <strong>@((Game.LatestScore?.MissionEffectiveness ?? 0).ToString("F1"))%</strong></p>
+        <p>Thank you for your service, <strong>@Game.TeamName</strong>.</p>
+    </div>
+}
+else
+{
+    <div class="dashboard">
+        <div class="dashboard-top">
+            <PhaseIndicator />
+            <ScorePanel />
+        </div>
+
+        <AnnouncementBanner />
+
+        <div class="dashboard-main">
+            <AlertFeed />
+            <DecisionLog />
+        </div>
+    </div>
+}
+
+@code {
+    private int _briefingPage;
+
+    protected override void OnInitialized()
+    {
+        Game.StateChanged += OnStateChanged;
+    }
+
+    private void GoToTechnicalBriefing() => _briefingPage = 1;
+
+    private void GoToNarrativeIntro() => _briefingPage = 0;
+
+    private void OnStateChanged()
+    {
+        if (Game.CurrentGamePhase == GamePhase.Briefing)
+            _briefingPage = 0;
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        Game.StateChanged -= OnStateChanged;
+    }
+}

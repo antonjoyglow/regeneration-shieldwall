@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>ShieldWall.Shared</RootNamespace>
+  </PropertyGroup>
+</Project>

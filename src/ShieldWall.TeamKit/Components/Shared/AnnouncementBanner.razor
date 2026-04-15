@@ -1,0 +1,16 @@
+@implements IDisposable
+@inject GameState Game
+
+@if (Game.LatestAnnouncement is not null)
+{
+    <div class="announcement-banner">
+        <span class="announcement-icon">📢</span>
+        <span class="announcement-text">@Game.LatestAnnouncement</span>
+    </div>
+}
+
+@code {
+    protected override void OnInitialized() => Game.StateChanged += OnStateChanged;
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
+    public void Dispose() => Game.StateChanged -= OnStateChanged;
+}

@@ -1,0 +1,26 @@
+@implements IDisposable
+@inject GameState Game
+
+<div class="phase-indicator">
+    @if (Game.CurrentPhase is not null)
+    {
+        <span class="phase-label">Phase @Game.CurrentPhase.PhaseNumber</span>
+        <span class="phase-name">@Game.CurrentPhase.Name</span>
+    }
+    else if (Game.CurrentGamePhase is GamePhase.Live or GamePhase.Paused)
+    {
+        <span class="phase-label">Standby</span>
+        <span class="phase-name">Awaiting first phase dispatch&hellip;</span>
+    }
+    else
+    {
+        <span class="phase-label">Awaiting</span>
+        <span class="phase-name">Waiting for stream start&hellip;</span>
+    }
+</div>
+
+@code {
+    protected override void OnInitialized() => Game.StateChanged += OnStateChanged;
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
+    public void Dispose() => Game.StateChanged -= OnStateChanged;
+}

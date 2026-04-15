@@ -1,0 +1,13 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+.DS_Store
+Thumbs.db
+publish/
+*.nupkg
+.env
+.env.local
+*.DotSettings.user
+**/node_modules/

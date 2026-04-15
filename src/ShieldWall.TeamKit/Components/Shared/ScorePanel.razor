@@ -1,0 +1,30 @@
+@implements IDisposable
+@inject GameState Game
+
+<div class="score-panel">
+    @if (Game.LatestScore is not null)
+    {
+        <div class="score-main">
+            <div class="score-effectiveness">@Game.LatestScore.MissionEffectiveness.ToString("F1")%</div>
+            <div class="score-label">Mission Effectiveness</div>
+        </div>
+        <div class="score-details">
+            <div>Score: @Game.LatestScore.TotalScore.ToString("F1") / @Game.LatestScore.MaxPossibleScore.ToString("F1")</div>
+            <div>Alerts: @Game.LatestScore.AlertsProcessed</div>
+            <div>Avg Latency: @Game.LatestScore.AverageLatencyMs ms</div>
+        </div>
+    }
+    else
+    {
+        <div class="score-main">
+            <div class="score-effectiveness">—%</div>
+            <div class="score-label">Awaiting first score update</div>
+        </div>
+    }
+</div>
+
+@code {
+    protected override void OnInitialized() => Game.StateChanged += OnStateChanged;
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
+    public void Dispose() => Game.StateChanged -= OnStateChanged;
+}

@@ -1,0 +1,18 @@
+@implements IDisposable
+@inject GameState Game
+
+<div class="decision-log">
+    <h3>Processing Log</h3>
+    <p class="log-hint">Watch your terminal output for detailed pipeline decisions.</p>
+    <p>✅ Pipeline active — alerts are being classified and submitted automatically.</p>
+    @if (Game.LatestScore is not null)
+    {
+        <p>📊 @Game.LatestScore.AlertsProcessed alerts scored so far</p>
+    }
+</div>
+
+@code {
+    protected override void OnInitialized() => Game.StateChanged += OnStateChanged;
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
+    public void Dispose() => Game.StateChanged -= OnStateChanged;
+}

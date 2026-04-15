@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ShieldWall.Shared/ShieldWall.Shared.csproj" />
+    <Project Path="src/ShieldWall.TeamKit/ShieldWall.TeamKit.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,29 @@
+@implements IDisposable
+@inject GameState Game
+
+<div class="alert-feed">
+    <h3>Alert Feed (@Game.RecentAlerts.Count received)</h3>
+    <div class="alert-list">
+        @foreach (var alert in Game.RecentAlerts.TakeLast(15).Reverse())
+        {
+            <div class="alert-item severity-@alert.RawSeverity">
+                <span class="alert-time">@alert.Timestamp.ToString("HH:mm:ss")</span>
+                <span class="alert-id">@alert.AlertId</span>
+                <span class="alert-type">@alert.Type</span>
+                <span class="alert-sector">@alert.Sector</span>
+                <span class="alert-severity">Sev: @alert.RawSeverity</span>
+                <span class="alert-confidence">Conf: @alert.ConfidenceScore.ToString("F2")</span>
+                @if (alert.CorrelationGroup is not null)
+                {
+                    <span class="alert-corr">🔗 @alert.CorrelationGroup</span>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    protected override void OnInitialized() => Game.StateChanged += OnStateChanged;
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
+    public void Dispose() => Game.StateChanged -= OnStateChanged;
+}
