@@ -1,5 +1,27 @@
 # 🛡️ Operation Shield Wall — Team Kit
 
+## Prerequisites
+
+Before you begin, make sure you have the following installed:
+
+| Tool | Version | Download |
+|------|---------|----------|
+| **.NET SDK** | **10.0** or later | [dotnet.microsoft.com/download](https://dotnet.microsoft.com/download) |
+| **IDE** | VS Code (recommended), Visual Studio 2022+, or JetBrains Rider | [code.visualstudio.com](https://code.visualstudio.com/) |
+| **Git** | Any recent version | [git-scm.com](https://git-scm.com/) |
+
+**VS Code recommended extensions** (optional but helpful):
+- [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) — IntelliSense, debugging, solution explorer
+- [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) — AI pair programming (if you have a license)
+
+**Verify your setup:**
+```bash
+dotnet --version
+# Should output 10.0.x
+```
+
+---
+
 ## Quick Start
 
 1. **Set your team name** — edit `src/ShieldWall.TeamKit/appsettings.json`:
