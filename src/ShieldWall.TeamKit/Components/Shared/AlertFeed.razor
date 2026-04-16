@@ -2,7 +2,7 @@
 @inject GameState Game
 
 <div class="alert-feed">
-    <h3>Alert Feed (@Game.RecentAlerts.Count received)</h3>
+    <h3>Alert Feed (@Game.TotalAlertsReceived received)</h3>
     <div class="alert-list">
         @foreach (var alert in Game.RecentAlerts.TakeLast(15).Reverse())
         {

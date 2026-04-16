@@ -20,6 +20,7 @@ public sealed class GameState(
     public PhaseInfo? CurrentPhase { get; private set; }
     public string? LatestAnnouncement { get; private set; }
     public GamePhase CurrentGamePhase { get; private set; } = GamePhase.Lobby;
+    public int TotalAlertsReceived { get; private set; }
 
     public IReadOnlyList<SentinelAlert> RecentAlerts
     {
@@ -57,7 +58,8 @@ public sealed class GameState(
             if (_recentAlerts.Count >= 50)
                 _recentAlerts.RemoveAt(0);
             _recentAlerts.Add(alert);
-            count = _recentAlerts.Count;
+            TotalAlertsReceived++;
+            count = TotalAlertsReceived;
         }
         logger.LogDebug("GameState received alert {AlertId} (total: {Count})", alert.AlertId, count);
         StateChanged?.Invoke();
@@ -113,6 +115,7 @@ public sealed class GameState(
                 _announcements.Clear();
             }
 
+            TotalAlertsReceived = 0;
             LatestScore = null;
             CurrentPhase = null;
             LatestAnnouncement = null;
