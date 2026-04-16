@@ -25,16 +25,16 @@ dotnet --version
 ## Quick Start
 
 1. **Set your team name** — edit `src/ShieldWall.TeamKit/appsettings.json`:
-   `json
+   ```json
    {
      "Team": { "Name": "YourTeamName" }
    }
-   `
+   ```
 
 2. **Build and run**:
-   `ash
+   ```bash
    dotnet run --project src/ShieldWall.TeamKit
-   `
+   ```
 
 3. **Open your browser**: http://localhost:5200
 

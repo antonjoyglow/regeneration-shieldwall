@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build: TeamKit",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "src/ShieldWall.TeamKit/ShieldWall.TeamKit.csproj"],
+      "group": "build",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Run: TeamKit",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "src/ShieldWall.TeamKit/ShieldWall.TeamKit.csproj"
+      ],
+      "isBackground": true,
+      "problemMatcher": "$msCompile",
+      "dependsOn": "Build: TeamKit"
+    }
+  ]
+}
