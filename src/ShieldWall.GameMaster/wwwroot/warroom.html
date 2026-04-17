@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shield Wall — War Room</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0e1a;
+            color: #d0d0d0;
+            font-family: 'Segoe UI', system-ui, monospace;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            background: #0f1428;
+            border-bottom: 2px solid #1a2744;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            color: #4cc9f0;
+            letter-spacing: 2px;
+        }
+
+        #phase-display {
+            font-size: 1.2rem;
+            padding: 8px 20px;
+            border-radius: 6px;
+            background: #1a2744;
+            color: #ffd166;
+        }
+
+        .phase-1 { color: #06d6a0; }
+        .phase-2 { color: #ffd166; }
+        .phase-3 { color: #f77f00; }
+        .phase-4 { color: #ef476f; animation: pulse 1s infinite; }
+
+        @keyframes pulse { 50% { opacity: 0.7; } }
+
+        #announcement-bar {
+            padding: 12px 32px;
+            background: rgba(255, 209, 102, 0.15);
+            border-bottom: 1px solid #ffd166;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #ffd166;
+        }
+
+        #announcement-bar.hidden { display: none; }
+
+        main {
+            display: flex;
+            padding: 24px 32px;
+            gap: 32px;
+            min-height: calc(100vh - 200px);
+        }
+
+        #leaderboard { flex: 2; }
+
+        #leaderboard h2,
+        #stats h2 {
+            font-size: 1rem;
+            color: #6c7a96;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .team-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            margin-bottom: 8px;
+            background: #12182e;
+            border-radius: 8px;
+            border-left: 4px solid #4cc9f0;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+
+        .team-row:first-child {
+            border-left-color: #ffd166;
+            background: #1a1f35;
+        }
+
+        .team-row.disconnected-team {
+            opacity: 0.5;
+            border-left-color: #444;
+        }
+
+        .team-rank {
+            font-weight: bold;
+            color: #6c7a96;
+            min-width: 40px;
+        }
+
+        .team-name {
+            flex: 1;
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+
+        .team-score {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #06d6a0;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        .team-alerts {
+            color: #6c7a96;
+            font-size: 0.85rem;
+            min-width: 80px;
+        }
+
+        .team-latency {
+            color: #6c7a96;
+            font-size: 0.85rem;
+            min-width: 60px;
+        }
+
+        .team-status { font-size: 0.8rem; }
+
+        #stats { flex: 1; }
+
+        .stat {
+            background: #12182e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .stat-label {
+            display: block;
+            color: #6c7a96;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4cc9f0;
+            margin-top: 4px;
+        }
+
+        .stat-value.connected { color: #06d6a0; font-size: 1rem; }
+        .stat-value.disconnected { color: #ef476f; font-size: 1rem; }
+        .stat-value.warning { color: #ffd166; font-size: 1rem; }
+
+        footer {
+            padding: 12px 32px;
+            background: #0f1428;
+            border-top: 1px solid #1a2744;
+            font-size: 0.85rem;
+            color: #6c7a96;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .ticker-alert { color: #4cc9f0; }
+
+        #empty-leaderboard {
+            color: #6c7a96;
+            font-style: italic;
+            padding: 40px 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>&#x1F6E1;&#xFE0F; OPERATION SHIELD WALL &mdash; WAR ROOM</h1>
+        <div id="phase-display">Awaiting&hellip;</div>
+    </header>
+
+    <div id="announcement-bar" class="hidden">
+        <span id="announcement-text"></span>
+    </div>
+
+    <main>
+        <section id="leaderboard">
+            <h2>Team Leaderboard</h2>
+            <div id="team-list">
+                <div id="empty-leaderboard">No teams connected yet. Waiting for teams to register&hellip;</div>
+            </div>
+        </section>
+
+        <section id="stats">
+            <h2>Mission Status</h2>
+            <div class="stat">
+                <span class="stat-label">Alerts Broadcast</span>
+                <span id="alert-count" class="stat-value">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Connected Teams</span>
+                <span id="team-count" class="stat-value">0/0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Stream</span>
+                <span id="stream-status" class="stat-value disconnected">Stopped</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Connection</span>
+                <span id="connection-status" class="stat-value disconnected">Disconnected</span>
+            </div>
+        </section>
+    </main>
+
+    <footer id="alert-ticker">
+        <span class="ticker-alert">Waiting for alerts&hellip;</span>
+    </footer>
+
+    <script src="js/signalr.min.js"></script>
+    <script>
+        "use strict";
+
+        var state = {
+            teams: [],
+            alertCount: 0,
+            currentPhase: null,
+            recentAlerts: [],
+            connected: false,
+            gamePhase: "Lobby"
+        };
+
+        var connection = null;
+        var pollTimer = null;
+
+        function escapeHtml(str) {
+            if (str == null) return "";
+            var div = document.createElement("div");
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
+
+        function initSignalR() {
+            if (typeof signalR === "undefined") {
+                console.warn("SignalR not loaded — using polling only");
+                startPolling();
+                return;
+            }
+
+            try {
+                connection = new signalR.HubConnectionBuilder()
+                    .withUrl("/sentinel-hub")
+                    .withAutomaticReconnect([0, 2000, 5000, 10000, 30000])
+                    .build();
+            } catch (e) {
+                console.error("Failed to build SignalR connection:", e);
+                startPolling();
+                return;
+            }
+
+            connection.on("ReceiveAlert", function (alert) {
+                state.alertCount++;
+                state.recentAlerts.unshift(alert);
+                if (state.recentAlerts.length > 20) {
+                    state.recentAlerts.pop();
+                }
+                renderAlertTicker();
+                document.getElementById("alert-count").textContent = state.alertCount;
+            });
+
+            connection.on("ReceivePhaseChange", function (phase) {
+                state.currentPhase = phase;
+                renderPhase();
+            });
+
+            connection.on("ReceiveAnnouncement", function (message) {
+                var bar = document.getElementById("announcement-bar");
+                document.getElementById("announcement-text").textContent = message;
+                bar.classList.remove("hidden");
+            });
+
+            connection.on("ReceiveScoreUpdate", function (update) {
+                if (!update || !update.teamId) return;
+                var idx = state.teams.findIndex(function (t) {
+                    return t.teamName && t.teamName.toLowerCase() === update.teamId.toLowerCase();
+                });
+                if (idx >= 0) {
+                    state.teams[idx].missionEffectiveness = update.missionEffectiveness;
+                    state.teams[idx].alertsProcessed = update.alertsProcessed;
+                    state.teams[idx].averageLatencyMs = update.averageLatencyMs;
+                }
+                renderLeaderboard();
+            });
+
+            var phaseNames = ["Lobby", "Briefing", "Live", "Paused", "Completed"];
+
+            connection.on("ReceiveGameStateChange", function (gamePhase) {
+                state.gamePhase = phaseNames[gamePhase] || String(gamePhase);
+                renderGameState();
+            });
+
+            connection.onreconnecting(function () {
+                setConnectionStatus("Reconnecting\u2026", "warning");
+            });
+
+            connection.onreconnected(function () {
+                setConnectionStatus("Connected", "connected");
+            });
+
+            connection.onclose(function () {
+                setConnectionStatus("Disconnected", "disconnected");
+            });
+
+            connection.start()
+                .then(function () {
+                    setConnectionStatus("Connected", "connected");
+                    return connection.invoke("JoinWarRoom");
+                })
+                .then(function () {
+                    console.log("JoinWarRoom succeeded — receiving broadcast messages");
+                })
+                .catch(function (err) {
+                    console.error("SignalR connection or JoinWarRoom failed:", err);
+                    setConnectionStatus("Disconnected", "disconnected");
+                });
+
+            startPolling();
+        }
+
+        function startPolling() {
+            if (pollTimer) return;
+            pollStatus();
+            pollTimer = setInterval(pollStatus, 5000);
+        }
+
+        function pollStatus() {
+            fetch("/api/status")
+                .then(function (res) {
+                    if (!res.ok) throw new Error("HTTP " + res.status);
+                    return res.json();
+                })
+                .then(function (data) {
+                    state.teams = data.connectedTeams || [];
+                    document.getElementById("team-count").textContent =
+                        data.connectedCount + "/" + data.teamCount;
+
+                    var streamEl = document.getElementById("stream-status");
+                    if (data.streamRunning && !data.streamPaused) {
+                        streamEl.textContent = "Active";
+                        streamEl.className = "stat-value connected";
+                    } else if (data.streamRunning && data.streamPaused) {
+                        streamEl.textContent = "Paused";
+                        streamEl.className = "stat-value warning";
+                    } else {
+                        streamEl.textContent = "Stopped";
+                        streamEl.className = "stat-value disconnected";
+                    }
+
+                    state.gamePhase = data.gamePhase || "Lobby";
+
+                    if (data.currentPhase) {
+                        state.currentPhase = data.currentPhase;
+                        renderPhase();
+                    }
+
+                    renderLeaderboard();
+                    renderGameState();
+                })
+                .catch(function (e) {
+                    console.warn("Status poll failed:", e);
+                });
+        }
+
+        function renderLeaderboard() {
+            var sorted = state.teams.slice().sort(function (a, b) {
+                return b.missionEffectiveness - a.missionEffectiveness;
+            });
+
+            var container = document.getElementById("team-list");
+
+            if (sorted.length === 0) {
+                container.innerHTML =
+                    '<div id="empty-leaderboard">No teams connected yet. Waiting for teams to register&hellip;</div>';
+                return;
+            }
+
+            var html = "";
+            for (var i = 0; i < sorted.length; i++) {
+                var team = sorted[i];
+                var rowClass = "team-row" + (team.isConnected ? "" : " disconnected-team");
+                html +=
+                    '<div class="' + rowClass + '">' +
+                    '<span class="team-rank">#' + (i + 1) + "</span>" +
+                    '<span class="team-name">' + escapeHtml(team.teamName) + "</span>" +
+                    '<span class="team-score">' + (team.missionEffectiveness || 0).toFixed(1) + "%</span>" +
+                    '<span class="team-alerts">' + (team.alertsProcessed || 0) + " alerts</span>" +
+                    '<span class="team-latency">' + (team.averageLatencyMs || 0) + "ms</span>" +
+                    '<span class="team-status">' + (team.isConnected ? "\u25CF" : "\u25CB") + "</span>" +
+                    "</div>";
+            }
+            container.innerHTML = html;
+        }
+
+        function renderPhase() {
+            var el = document.getElementById("phase-display");
+            if (state.currentPhase) {
+                el.textContent =
+                    "Phase " + state.currentPhase.phaseNumber + ": " + state.currentPhase.name;
+                el.className = "phase-" + state.currentPhase.phaseNumber;
+            }
+        }
+
+        function renderAlertTicker() {
+            var ticker = document.getElementById("alert-ticker");
+            var items = state.recentAlerts.slice(0, 10);
+            var html = "";
+            for (var i = 0; i < items.length; i++) {
+                var a = items[i];
+                if (i > 0) html += " | ";
+                html +=
+                    '<span class="ticker-alert">' +
+                    escapeHtml(a.alertId) + " " +
+                    escapeHtml(a.type) + " " +
+                    escapeHtml(a.sector) +
+                    "</span>";
+            }
+            ticker.innerHTML = html || '<span class="ticker-alert">Waiting for alerts&hellip;</span>';
+        }
+
+        function renderGameState() {
+            var display = document.getElementById("phase-display");
+            var gp = state.gamePhase || "Lobby";
+
+            if (gp === "Lobby") {
+                display.textContent = "Lobby — Awaiting teams";
+                display.className = "";
+            } else if (gp === "Briefing") {
+                display.textContent = "Briefing — Read your code!";
+                display.className = "phase-2";
+            } else if (gp === "Completed") {
+                display.textContent = "Game Over — Final Scores";
+                display.className = "phase-4";
+            }
+            /* During Live/Paused, renderPhase() handles the display */
+        }
+
+        function setConnectionStatus(text, className) {
+            var el = document.getElementById("connection-status");
+            el.textContent = text;
+            el.className = "stat-value " + className;
+            state.connected = className === "connected";
+        }
+
+        document.addEventListener("DOMContentLoaded", initSignalR);
+    </script>
+</body>
+</html>

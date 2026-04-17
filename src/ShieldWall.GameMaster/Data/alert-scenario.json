@@ -1,0 +1,3525 @@
+{
+  "metadata": {
+    "totalAlerts": 160,
+    "durationMinutes": 60,
+    "phases": [
+      {
+        "name": "Calm Waters",
+        "startMinute": 0,
+        "endMinute": 15
+      },
+      {
+        "name": "Fog of War",
+        "startMinute": 15,
+        "endMinute": 30
+      },
+      {
+        "name": "Pattern Recognition",
+        "startMinute": 30,
+        "endMinute": 45
+      },
+      {
+        "name": "The Storm",
+        "startMinute": 45,
+        "endMinute": 60
+      }
+    ]
+  },
+  "alerts": [
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.83,
+      "broadcastOffsetSeconds": 30,
+      "type": "Perimeter",
+      "alertId": "SA-0001",
+      "metadata": {
+        "velocity": "65 kts",
+        "trackId": "TRK-0174",
+        "direction": "NW",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.85,
+      "broadcastOffsetSeconds": 69,
+      "type": "Sensor",
+      "alertId": "SA-0002",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "thermal",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 9,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.91,
+      "broadcastOffsetSeconds": 99,
+      "type": "Cyber",
+      "alertId": "SA-0003",
+      "metadata": {
+        "port": "8080",
+        "attack": "port scan",
+        "protocol": "ICMP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.78,
+      "broadcastOffsetSeconds": 138,
+      "type": "Comms",
+      "alertId": "SA-0004",
+      "metadata": {
+        "anomaly": "jamming signature",
+        "frequency": "2.4 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 9,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.8,
+      "broadcastOffsetSeconds": 175,
+      "type": "Sensor",
+      "alertId": "SA-0005",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "thermal",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.55,
+      "broadcastOffsetSeconds": 205,
+      "type": "Comms",
+      "alertId": "SA-0006",
+      "metadata": {
+        "anomaly": "jamming signature",
+        "frequency": "900 MHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.76,
+      "broadcastOffsetSeconds": 243,
+      "type": "Comms",
+      "alertId": "SA-0007",
+      "metadata": {
+        "anomaly": "carrier drop",
+        "frequency": "5.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.08,
+      "broadcastOffsetSeconds": 281,
+      "type": "Cyber",
+      "alertId": "SA-0008",
+      "metadata": {
+        "port": "22",
+        "protocol": "ICMP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "BioSensor-Delta",
+      "confidenceScore": 0.88,
+      "broadcastOffsetSeconds": 311,
+      "type": "Sensor",
+      "alertId": "SA-0009",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "pressure",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Radar-NorthEast",
+      "confidenceScore": 0.87,
+      "broadcastOffsetSeconds": 341,
+      "type": "Perimeter",
+      "alertId": "SA-0010",
+      "metadata": {
+        "velocity": "38 kts",
+        "trackId": "TRK-0045",
+        "direction": "W",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.45,
+      "broadcastOffsetSeconds": 375,
+      "type": "Comms",
+      "alertId": "SA-0011",
+      "metadata": {
+        "anomaly": "frequency hop",
+        "frequency": "5.0 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.8,
+      "broadcastOffsetSeconds": 412,
+      "type": "Environmental",
+      "alertId": "SA-0012",
+      "metadata": {
+        "trigger": "wind gust",
+        "windSpeed": "14 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Radar-North",
+      "confidenceScore": 0.81,
+      "broadcastOffsetSeconds": 447,
+      "type": "Perimeter",
+      "alertId": "SA-0013",
+      "metadata": {
+        "velocity": "48 kts",
+        "trackId": "TRK-0766",
+        "direction": "S",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.86,
+      "broadcastOffsetSeconds": 485,
+      "type": "Sensor",
+      "alertId": "SA-0014",
+      "metadata": {
+        "magnitude": "medium",
+        "reading": "vibration",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.84,
+      "broadcastOffsetSeconds": 527,
+      "type": "Cyber",
+      "alertId": "SA-0015",
+      "metadata": {
+        "port": "443",
+        "protocol": "ICMP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.97,
+      "broadcastOffsetSeconds": 569,
+      "type": "Cyber",
+      "alertId": "SA-0016",
+      "metadata": {
+        "port": "22",
+        "protocol": "TLS",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.07,
+      "broadcastOffsetSeconds": 609,
+      "type": "Environmental",
+      "alertId": "SA-0017",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "condition": "light rain",
+        "windSpeed": "43 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CyberSensor-West",
+      "confidenceScore": 0.65,
+      "broadcastOffsetSeconds": 642,
+      "type": "Cyber",
+      "alertId": "SA-0018",
+      "metadata": {
+        "port": "22",
+        "attack": "port scan",
+        "protocol": "TLS",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.91,
+      "broadcastOffsetSeconds": 675,
+      "type": "Comms",
+      "alertId": "SA-0019",
+      "metadata": {
+        "anomaly": "frequency hop",
+        "frequency": "5.0 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "BioSensor-Delta",
+      "confidenceScore": 0.35,
+      "broadcastOffsetSeconds": 710,
+      "type": "Sensor",
+      "alertId": "SA-0020",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "pressure",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.18,
+      "broadcastOffsetSeconds": 741,
+      "type": "Environmental",
+      "alertId": "SA-0021",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "windSpeed": "29 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 9,
+      "correlationGroup": "",
+      "source": "Radar-East",
+      "confidenceScore": 0.97,
+      "broadcastOffsetSeconds": 782,
+      "type": "Perimeter",
+      "alertId": "SA-0022",
+      "metadata": {
+        "velocity": "81 kts",
+        "trackId": "TRK-0747",
+        "direction": "SE",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.4,
+      "broadcastOffsetSeconds": 815,
+      "type": "Environmental",
+      "alertId": "SA-0023",
+      "metadata": {
+        "trigger": "wind gust",
+        "windSpeed": "16 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "BioSensor-Delta",
+      "confidenceScore": 0.09,
+      "broadcastOffsetSeconds": 850,
+      "type": "Sensor",
+      "alertId": "SA-0024",
+      "metadata": {
+        "magnitude": "extreme",
+        "reading": "pressure",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "BioSensor-Delta",
+      "confidenceScore": 0.13,
+      "broadcastOffsetSeconds": 885,
+      "type": "Sensor",
+      "alertId": "SA-0025",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "EM anomaly",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Radar-NorthEast",
+      "confidenceScore": 0.79,
+      "broadcastOffsetSeconds": 910,
+      "type": "Perimeter",
+      "alertId": "SA-0026",
+      "metadata": {
+        "direction": "S",
+        "velocity": "64 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "Radar-NorthEast",
+      "confidenceScore": 0.07,
+      "broadcastOffsetSeconds": 930,
+      "type": "Perimeter",
+      "alertId": "SA-0027",
+      "metadata": {
+        "direction": "N",
+        "velocity": "26 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.96,
+      "broadcastOffsetSeconds": 946,
+      "type": "Environmental",
+      "alertId": "SA-0028",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "condition": "storm approaching",
+        "windSpeed": "51 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Radar-NorthEast",
+      "confidenceScore": 0.11,
+      "broadcastOffsetSeconds": 964,
+      "type": "Perimeter",
+      "alertId": "SA-0029",
+      "metadata": {
+        "velocity": "39 kts",
+        "trackId": "TRK-0079",
+        "direction": "SE",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 984,
+      "type": "Environmental",
+      "alertId": "SA-0030",
+      "metadata": {
+        "trigger": "humidity spike",
+        "condition": "light rain",
+        "windSpeed": "23 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.05,
+      "broadcastOffsetSeconds": 1008,
+      "type": "Comms",
+      "alertId": "SA-0031",
+      "metadata": {
+        "anomaly": "carrier drop",
+        "frequency": "1.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.94,
+      "broadcastOffsetSeconds": 1023,
+      "type": "Perimeter",
+      "alertId": "SA-0032",
+      "metadata": {
+        "direction": "E",
+        "velocity": "36 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CyberSensor-Core",
+      "confidenceScore": 0.13,
+      "broadcastOffsetSeconds": 1044,
+      "type": "Cyber",
+      "alertId": "SA-0033",
+      "metadata": {
+        "port": "8080",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "BioSensor-Delta",
+      "confidenceScore": 0.97,
+      "broadcastOffsetSeconds": 1069,
+      "type": "Sensor",
+      "alertId": "SA-0034",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "vibration",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.09,
+      "broadcastOffsetSeconds": 1085,
+      "type": "Comms",
+      "alertId": "SA-0035",
+      "metadata": {
+        "anomaly": "frequency hop",
+        "frequency": "900 MHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.04,
+      "broadcastOffsetSeconds": 1103,
+      "type": "Sensor",
+      "alertId": "SA-0036",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "EM anomaly",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.91,
+      "broadcastOffsetSeconds": 1125,
+      "type": "Environmental",
+      "alertId": "SA-0037",
+      "metadata": {
+        "trigger": "temperature drop",
+        "condition": "clear",
+        "windSpeed": "37 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 1143,
+      "type": "Sensor",
+      "alertId": "SA-0038",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "pressure",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "BioSensor-Delta",
+      "confidenceScore": 0.49,
+      "broadcastOffsetSeconds": 1162,
+      "type": "Sensor",
+      "alertId": "SA-0039",
+      "metadata": {
+        "magnitude": "medium",
+        "reading": "pressure",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.14,
+      "broadcastOffsetSeconds": 1180,
+      "type": "Sensor",
+      "alertId": "SA-0040",
+      "metadata": {
+        "magnitude": "medium",
+        "reading": "acoustic",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CyberSensor-West",
+      "confidenceScore": 0.08,
+      "broadcastOffsetSeconds": 1204,
+      "type": "Cyber",
+      "alertId": "SA-0041",
+      "metadata": {
+        "port": "3389",
+        "attack": "brute force",
+        "protocol": "ICMP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.98,
+      "broadcastOffsetSeconds": 1222,
+      "type": "Environmental",
+      "alertId": "SA-0042",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "windSpeed": "14 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.1,
+      "broadcastOffsetSeconds": 1238,
+      "type": "Perimeter",
+      "alertId": "SA-0043",
+      "metadata": {
+        "velocity": "79 kts",
+        "trackId": "TRK-0825",
+        "direction": "NW",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.93,
+      "broadcastOffsetSeconds": 1257,
+      "type": "Comms",
+      "alertId": "SA-0044",
+      "metadata": {
+        "anomaly": "burst pattern",
+        "frequency": "2.4 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.23,
+      "broadcastOffsetSeconds": 1279,
+      "type": "Comms",
+      "alertId": "SA-0045",
+      "metadata": {
+        "anomaly": "carrier drop",
+        "frequency": "1.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.08,
+      "broadcastOffsetSeconds": 1303,
+      "type": "Environmental",
+      "alertId": "SA-0046",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "condition": "light rain",
+        "windSpeed": "54 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.28,
+      "broadcastOffsetSeconds": 1326,
+      "type": "Perimeter",
+      "alertId": "SA-0047",
+      "metadata": {
+        "direction": "NNE",
+        "velocity": "71 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.93,
+      "broadcastOffsetSeconds": 1350,
+      "type": "Environmental",
+      "alertId": "SA-0048",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "windSpeed": "61 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.12,
+      "broadcastOffsetSeconds": 1374,
+      "type": "Cyber",
+      "alertId": "SA-0049",
+      "metadata": {
+        "port": "8443",
+        "attack": "C2 beacon",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.25,
+      "broadcastOffsetSeconds": 1389,
+      "type": "Cyber",
+      "alertId": "SA-0050",
+      "metadata": {
+        "port": "22",
+        "protocol": "ICMP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.23,
+      "broadcastOffsetSeconds": 1409,
+      "type": "Environmental",
+      "alertId": "SA-0051",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "condition": "haze",
+        "windSpeed": "34 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.28,
+      "broadcastOffsetSeconds": 1424,
+      "type": "Environmental",
+      "alertId": "SA-0052",
+      "metadata": {
+        "trigger": "temperature drop",
+        "windSpeed": "19 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.16,
+      "broadcastOffsetSeconds": 1448,
+      "type": "Environmental",
+      "alertId": "SA-0053",
+      "metadata": {
+        "trigger": "wind gust",
+        "windSpeed": "59 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.45,
+      "broadcastOffsetSeconds": 1472,
+      "type": "Sensor",
+      "alertId": "SA-0054",
+      "metadata": {
+        "magnitude": "extreme",
+        "reading": "EM anomaly",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.31,
+      "broadcastOffsetSeconds": 1491,
+      "type": "Sensor",
+      "alertId": "SA-0055",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "vibration",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.41,
+      "broadcastOffsetSeconds": 1507,
+      "type": "Sensor",
+      "alertId": "SA-0056",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "EM anomaly",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.51,
+      "broadcastOffsetSeconds": 1523,
+      "type": "Sensor",
+      "alertId": "SA-0057",
+      "metadata": {
+        "magnitude": "extreme",
+        "reading": "pressure",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.31,
+      "broadcastOffsetSeconds": 1541,
+      "type": "Sensor",
+      "alertId": "SA-0058",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "EM anomaly",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P2-001"
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "CG-P2-001",
+      "source": "Radar-North",
+      "confidenceScore": 0.72,
+      "broadcastOffsetSeconds": 1557,
+      "type": "Perimeter",
+      "alertId": "SA-0059",
+      "metadata": {
+        "velocity": "66 kts",
+        "trackId": "TRK-0478",
+        "direction": "E",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P2-001"
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "CG-P2-001",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.68,
+      "broadcastOffsetSeconds": 1577,
+      "type": "Sensor",
+      "alertId": "SA-0060",
+      "metadata": {
+        "magnitude": "medium",
+        "reading": "pressure",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-001"
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "CG-P3-001",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.71,
+      "broadcastOffsetSeconds": 1810,
+      "type": "Sensor",
+      "alertId": "SA-0061",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "pressure",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-001"
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "CG-P3-001",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.68,
+      "broadcastOffsetSeconds": 1847,
+      "type": "Cyber",
+      "alertId": "SA-0062",
+      "metadata": {
+        "port": "3389",
+        "attack": "port scan",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-001"
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "CG-P3-001",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.77,
+      "broadcastOffsetSeconds": 1879,
+      "type": "Comms",
+      "alertId": "SA-0063",
+      "metadata": {
+        "anomaly": "jamming signature",
+        "frequency": "900 MHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.11,
+      "broadcastOffsetSeconds": 1918,
+      "type": "Sensor",
+      "alertId": "SA-0064",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "EM anomaly",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.95,
+      "broadcastOffsetSeconds": 1931,
+      "type": "Comms",
+      "alertId": "SA-0065",
+      "metadata": {
+        "anomaly": "burst pattern",
+        "frequency": "2.4 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CyberSensor-West",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 1943,
+      "type": "Cyber",
+      "alertId": "SA-0066",
+      "metadata": {
+        "port": "22",
+        "attack": "port scan",
+        "protocol": "UDP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.07,
+      "broadcastOffsetSeconds": 1954,
+      "type": "Sensor",
+      "alertId": "SA-0067",
+      "metadata": {
+        "magnitude": "extreme",
+        "reading": "EM anomaly",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-002"
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "Radar-East",
+      "confidenceScore": 0.65,
+      "broadcastOffsetSeconds": 1973,
+      "type": "Perimeter",
+      "alertId": "SA-0068",
+      "metadata": {
+        "velocity": "19 kts",
+        "trackId": "TRK-0297",
+        "direction": "N",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-002"
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "BioSensor-Delta",
+      "confidenceScore": 0.59,
+      "broadcastOffsetSeconds": 1995,
+      "type": "Sensor",
+      "alertId": "SA-0069",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "thermal",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-002"
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "CyberSensor-West",
+      "confidenceScore": 0.72,
+      "broadcastOffsetSeconds": 2018,
+      "type": "Cyber",
+      "alertId": "SA-0070",
+      "metadata": {
+        "port": "80",
+        "attack": "data exfil",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-002"
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.66,
+      "broadcastOffsetSeconds": 2047,
+      "type": "Comms",
+      "alertId": "SA-0071",
+      "metadata": {
+        "anomaly": "encryption anomaly",
+        "frequency": "2.4 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.14,
+      "broadcastOffsetSeconds": 2082,
+      "type": "Environmental",
+      "alertId": "SA-0072",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "condition": "fog",
+        "windSpeed": "7 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.97,
+      "broadcastOffsetSeconds": 2097,
+      "type": "Environmental",
+      "alertId": "SA-0073",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "condition": "haze",
+        "windSpeed": "19 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.08,
+      "broadcastOffsetSeconds": 2108,
+      "type": "Environmental",
+      "alertId": "SA-0074",
+      "metadata": {
+        "trigger": "wind gust",
+        "condition": "storm approaching",
+        "windSpeed": "10 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-003"
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "CG-P3-003",
+      "source": "CyberSensor-Core",
+      "confidenceScore": 0.82,
+      "broadcastOffsetSeconds": 2119,
+      "type": "Cyber",
+      "alertId": "SA-0075",
+      "metadata": {
+        "port": "80",
+        "protocol": "TLS",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-003"
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "CG-P3-003",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.78,
+      "broadcastOffsetSeconds": 2149,
+      "type": "Cyber",
+      "alertId": "SA-0076",
+      "metadata": {
+        "port": "80",
+        "protocol": "UDP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-003"
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "CG-P3-003",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.74,
+      "broadcastOffsetSeconds": 2184,
+      "type": "Comms",
+      "alertId": "SA-0077",
+      "metadata": {
+        "anomaly": "jamming signature",
+        "frequency": "5.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 2207,
+      "type": "Cyber",
+      "alertId": "SA-0078",
+      "metadata": {
+        "port": "443",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.93,
+      "broadcastOffsetSeconds": 2223,
+      "type": "Sensor",
+      "alertId": "SA-0079",
+      "metadata": {
+        "magnitude": "medium",
+        "reading": "vibration",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.1,
+      "broadcastOffsetSeconds": 2237,
+      "type": "Environmental",
+      "alertId": "SA-0080",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "windSpeed": "8 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "CyberSensor-Core",
+      "confidenceScore": 0.96,
+      "broadcastOffsetSeconds": 2248,
+      "type": "Cyber",
+      "alertId": "SA-0081",
+      "metadata": {
+        "port": "443",
+        "protocol": "TLS",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Radar-NorthEast",
+      "confidenceScore": 0.09,
+      "broadcastOffsetSeconds": 2265,
+      "type": "Perimeter",
+      "alertId": "SA-0082",
+      "metadata": {
+        "direction": "SW",
+        "velocity": "54 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-004"
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Radar-NorthEast",
+      "confidenceScore": 0.7,
+      "broadcastOffsetSeconds": 2281,
+      "type": "Perimeter",
+      "alertId": "SA-0083",
+      "metadata": {
+        "direction": "NNW",
+        "velocity": "23 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-004"
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.65,
+      "broadcastOffsetSeconds": 2310,
+      "type": "Sensor",
+      "alertId": "SA-0084",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "EM anomaly",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P3-004"
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Radar-North",
+      "confidenceScore": 0.73,
+      "broadcastOffsetSeconds": 2343,
+      "type": "Perimeter",
+      "alertId": "SA-0085",
+      "metadata": {
+        "velocity": "48 kts",
+        "trackId": "TRK-0740",
+        "direction": "N",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Radar-North",
+      "confidenceScore": 0.05,
+      "broadcastOffsetSeconds": 2378,
+      "type": "Perimeter",
+      "alertId": "SA-0086",
+      "metadata": {
+        "direction": "NNW",
+        "velocity": "50 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.1,
+      "broadcastOffsetSeconds": 2393,
+      "type": "Perimeter",
+      "alertId": "SA-0087",
+      "metadata": {
+        "velocity": "82 kts",
+        "trackId": "TRK-0375",
+        "direction": "S",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "Radar-East",
+      "confidenceScore": 0.96,
+      "broadcastOffsetSeconds": 2407,
+      "type": "Perimeter",
+      "alertId": "SA-0088",
+      "metadata": {
+        "velocity": "79 kts",
+        "trackId": "TRK-0989",
+        "direction": "NNE",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.35,
+      "broadcastOffsetSeconds": 2422,
+      "type": "Environmental",
+      "alertId": "SA-0089",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "condition": "clear",
+        "windSpeed": "51 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.12,
+      "broadcastOffsetSeconds": 2440,
+      "type": "Comms",
+      "alertId": "SA-0090",
+      "metadata": {
+        "anomaly": "encryption anomaly",
+        "frequency": "5.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.94,
+      "broadcastOffsetSeconds": 2450,
+      "type": "Sensor",
+      "alertId": "SA-0091",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "EM anomaly",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "Radar-North",
+      "confidenceScore": 0.13,
+      "broadcastOffsetSeconds": 2462,
+      "type": "Perimeter",
+      "alertId": "SA-0092",
+      "metadata": {
+        "velocity": "51 kts",
+        "trackId": "TRK-0809",
+        "direction": "NNW",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "Radar-East",
+      "confidenceScore": 0.81,
+      "broadcastOffsetSeconds": 2480,
+      "type": "Perimeter",
+      "alertId": "SA-0093",
+      "metadata": {
+        "direction": "N",
+        "velocity": "16 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.55,
+      "broadcastOffsetSeconds": 2496,
+      "type": "Perimeter",
+      "alertId": "SA-0094",
+      "metadata": {
+        "velocity": "76 kts",
+        "trackId": "TRK-0879",
+        "direction": "E",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.94,
+      "broadcastOffsetSeconds": 2514,
+      "type": "Sensor",
+      "alertId": "SA-0095",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "acoustic",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.07,
+      "broadcastOffsetSeconds": 2525,
+      "type": "Environmental",
+      "alertId": "SA-0096",
+      "metadata": {
+        "trigger": "temperature drop",
+        "windSpeed": "57 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.44,
+      "broadcastOffsetSeconds": 2535,
+      "type": "Comms",
+      "alertId": "SA-0097",
+      "metadata": {
+        "anomaly": "carrier drop",
+        "frequency": "900 MHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.92,
+      "broadcastOffsetSeconds": 2550,
+      "type": "Comms",
+      "alertId": "SA-0098",
+      "metadata": {
+        "anomaly": "encryption anomaly",
+        "frequency": "1.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.04,
+      "broadcastOffsetSeconds": 2565,
+      "type": "Comms",
+      "alertId": "SA-0099",
+      "metadata": {
+        "anomaly": "encryption anomaly",
+        "frequency": "5.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 9,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.64,
+      "broadcastOffsetSeconds": 2575,
+      "type": "Environmental",
+      "alertId": "SA-0100",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "windSpeed": "45 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.49,
+      "broadcastOffsetSeconds": 2710,
+      "type": "Cyber",
+      "alertId": "SA-0101",
+      "metadata": {
+        "port": "443",
+        "protocol": "UDP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.04,
+      "broadcastOffsetSeconds": 2713,
+      "type": "Perimeter",
+      "alertId": "SA-0102",
+      "metadata": {
+        "velocity": "33 kts",
+        "trackId": "TRK-0361",
+        "direction": "E",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "Radar-North",
+      "confidenceScore": 0.95,
+      "broadcastOffsetSeconds": 2716,
+      "type": "Perimeter",
+      "alertId": "SA-0103",
+      "metadata": {
+        "velocity": "73 kts",
+        "trackId": "TRK-0534",
+        "direction": "NE",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Radar-North",
+      "confidenceScore": 0.1,
+      "broadcastOffsetSeconds": 2723,
+      "type": "Perimeter",
+      "alertId": "SA-0104",
+      "metadata": {
+        "direction": "NE",
+        "velocity": "59 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.11,
+      "broadcastOffsetSeconds": 2726,
+      "type": "Sensor",
+      "alertId": "SA-0105",
+      "metadata": {
+        "magnitude": "extreme",
+        "reading": "EM anomaly",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.97,
+      "broadcastOffsetSeconds": 2729,
+      "type": "Environmental",
+      "alertId": "SA-0106",
+      "metadata": {
+        "trigger": "humidity spike",
+        "windSpeed": "41 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 2736,
+      "type": "Environmental",
+      "alertId": "SA-0107",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "condition": "light rain",
+        "windSpeed": "56 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Radar-NorthEast",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 2744,
+      "type": "Perimeter",
+      "alertId": "SA-0108",
+      "metadata": {
+        "velocity": "69 kts",
+        "trackId": "TRK-0242",
+        "direction": "NE",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.98,
+      "broadcastOffsetSeconds": 2750,
+      "type": "Environmental",
+      "alertId": "SA-0109",
+      "metadata": {
+        "trigger": "wind gust",
+        "condition": "fog",
+        "windSpeed": "13 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P4-001"
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "CG-P4-001",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.75,
+      "broadcastOffsetSeconds": 2757,
+      "type": "Sensor",
+      "alertId": "SA-0110",
+      "metadata": {
+        "magnitude": "medium",
+        "reading": "vibration",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.09,
+      "broadcastOffsetSeconds": 2760,
+      "type": "Environmental",
+      "alertId": "SA-0111",
+      "metadata": {
+        "trigger": "temperature drop",
+        "condition": "clear",
+        "windSpeed": "38 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P4-001"
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "CG-P4-001",
+      "source": "CyberSensor-Core",
+      "confidenceScore": 0.8,
+      "broadcastOffsetSeconds": 2763,
+      "type": "Cyber",
+      "alertId": "SA-0112",
+      "metadata": {
+        "port": "3389",
+        "protocol": "UDP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.07,
+      "broadcastOffsetSeconds": 2768,
+      "type": "Environmental",
+      "alertId": "SA-0113",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "windSpeed": "22 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P4-001"
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "CG-P4-001",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.85,
+      "broadcastOffsetSeconds": 2774,
+      "type": "Comms",
+      "alertId": "SA-0114",
+      "metadata": {
+        "anomaly": "jamming signature",
+        "frequency": "1.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.07,
+      "broadcastOffsetSeconds": 2779,
+      "type": "Cyber",
+      "alertId": "SA-0115",
+      "metadata": {
+        "port": "22",
+        "protocol": "ICMP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.92,
+      "broadcastOffsetSeconds": 2785,
+      "type": "Comms",
+      "alertId": "SA-0116",
+      "metadata": {
+        "anomaly": "encryption anomaly",
+        "frequency": "2.4 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.11,
+      "broadcastOffsetSeconds": 2788,
+      "type": "Environmental",
+      "alertId": "SA-0117",
+      "metadata": {
+        "trigger": "humidity spike",
+        "windSpeed": "59 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "BioSensor-Delta",
+      "confidenceScore": 0.12,
+      "broadcastOffsetSeconds": 2791,
+      "type": "Sensor",
+      "alertId": "SA-0118",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "thermal",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "CyberSensor-Core",
+      "confidenceScore": 0.96,
+      "broadcastOffsetSeconds": 2799,
+      "type": "Cyber",
+      "alertId": "SA-0119",
+      "metadata": {
+        "port": "8443",
+        "protocol": "TLS",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Radar-NorthEast",
+      "confidenceScore": 0.05,
+      "broadcastOffsetSeconds": 2803,
+      "type": "Perimeter",
+      "alertId": "SA-0120",
+      "metadata": {
+        "velocity": "68 kts",
+        "trackId": "TRK-0737",
+        "direction": "S",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.05,
+      "broadcastOffsetSeconds": 2810,
+      "type": "Cyber",
+      "alertId": "SA-0121",
+      "metadata": {
+        "port": "8443",
+        "attack": "C2 beacon",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.96,
+      "broadcastOffsetSeconds": 2816,
+      "type": "Environmental",
+      "alertId": "SA-0122",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "condition": "light rain",
+        "windSpeed": "63 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.86,
+      "broadcastOffsetSeconds": 2822,
+      "type": "Environmental",
+      "alertId": "SA-0123",
+      "metadata": {
+        "trigger": "pressure anomaly",
+        "windSpeed": "63 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CyberSensor-West",
+      "confidenceScore": 0.08,
+      "broadcastOffsetSeconds": 2827,
+      "type": "Cyber",
+      "alertId": "SA-0124",
+      "metadata": {
+        "port": "443",
+        "attack": "C2 beacon",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.1,
+      "broadcastOffsetSeconds": 2833,
+      "type": "Environmental",
+      "alertId": "SA-0125",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "windSpeed": "7 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.97,
+      "broadcastOffsetSeconds": 2841,
+      "type": "Sensor",
+      "alertId": "SA-0126",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "acoustic",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 2846,
+      "type": "Environmental",
+      "alertId": "SA-0127",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "windSpeed": "52 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.08,
+      "broadcastOffsetSeconds": 2850,
+      "type": "Comms",
+      "alertId": "SA-0128",
+      "metadata": {
+        "anomaly": "carrier drop",
+        "frequency": "1.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.97,
+      "broadcastOffsetSeconds": 2853,
+      "type": "Comms",
+      "alertId": "SA-0129",
+      "metadata": {
+        "anomaly": "carrier drop",
+        "frequency": "5.0 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.15,
+      "broadcastOffsetSeconds": 2860,
+      "type": "Sensor",
+      "alertId": "SA-0130",
+      "metadata": {
+        "magnitude": "extreme",
+        "reading": "EM anomaly",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "low",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.13,
+      "broadcastOffsetSeconds": 2868,
+      "type": "Sensor",
+      "alertId": "SA-0131",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "pressure",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.94,
+      "broadcastOffsetSeconds": 2872,
+      "type": "Sensor",
+      "alertId": "SA-0132",
+      "metadata": {
+        "magnitude": "extreme",
+        "reading": "EM anomaly",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.05,
+      "broadcastOffsetSeconds": 2879,
+      "type": "Environmental",
+      "alertId": "SA-0133",
+      "metadata": {
+        "trigger": "humidity spike",
+        "windSpeed": "40 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "Sensor-Grid-4",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 2887,
+      "type": "Sensor",
+      "alertId": "SA-0134",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "vibration",
+        "sourceReliability": "low"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.94,
+      "broadcastOffsetSeconds": 2891,
+      "type": "Sensor",
+      "alertId": "SA-0135",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "pressure",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P4-002"
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "Radar-East",
+      "confidenceScore": 0.88,
+      "broadcastOffsetSeconds": 2896,
+      "type": "Perimeter",
+      "alertId": "SA-0136",
+      "metadata": {
+        "velocity": "34 kts",
+        "trackId": "TRK-0761",
+        "direction": "S",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.09,
+      "broadcastOffsetSeconds": 2903,
+      "type": "Comms",
+      "alertId": "SA-0137",
+      "metadata": {
+        "anomaly": "burst pattern",
+        "frequency": "5.8 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P4-002"
+      },
+      "rawSeverity": 9,
+      "correlationGroup": "",
+      "source": "CyberSensor-Core",
+      "confidenceScore": 0.91,
+      "broadcastOffsetSeconds": 2909,
+      "type": "Cyber",
+      "alertId": "SA-0138",
+      "metadata": {
+        "port": "8443",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.07,
+      "broadcastOffsetSeconds": 2914,
+      "type": "Environmental",
+      "alertId": "SA-0139",
+      "metadata": {
+        "trigger": "temperature drop",
+        "windSpeed": "45 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": true,
+        "compoundGroupId": "CG-P4-002"
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.83,
+      "broadcastOffsetSeconds": 2921,
+      "type": "Sensor",
+      "alertId": "SA-0140",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "pressure",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.93,
+      "broadcastOffsetSeconds": 2927,
+      "type": "Perimeter",
+      "alertId": "SA-0141",
+      "metadata": {
+        "direction": "W",
+        "velocity": "14 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.11,
+      "broadcastOffsetSeconds": 2935,
+      "type": "Environmental",
+      "alertId": "SA-0142",
+      "metadata": {
+        "trigger": "seismic tremor",
+        "windSpeed": "53 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.95,
+      "broadcastOffsetSeconds": 2943,
+      "type": "Cyber",
+      "alertId": "SA-0143",
+      "metadata": {
+        "port": "445",
+        "protocol": "ICMP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "Radar-East",
+      "confidenceScore": 0.1,
+      "broadcastOffsetSeconds": 2948,
+      "type": "Perimeter",
+      "alertId": "SA-0144",
+      "metadata": {
+        "direction": "E",
+        "velocity": "55 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.93,
+      "broadcastOffsetSeconds": 2955,
+      "type": "Environmental",
+      "alertId": "SA-0145",
+      "metadata": {
+        "trigger": "humidity spike",
+        "condition": "haze",
+        "windSpeed": "65 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.07,
+      "broadcastOffsetSeconds": 2959,
+      "type": "Sensor",
+      "alertId": "SA-0146",
+      "metadata": {
+        "magnitude": "extreme",
+        "reading": "EM anomaly",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.69,
+      "broadcastOffsetSeconds": 2962,
+      "type": "Environmental",
+      "alertId": "SA-0147",
+      "metadata": {
+        "trigger": "wind gust",
+        "condition": "fog",
+        "windSpeed": "54 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "CommMonitor-West",
+      "confidenceScore": 0.08,
+      "broadcastOffsetSeconds": 2970,
+      "type": "Comms",
+      "alertId": "SA-0148",
+      "metadata": {
+        "anomaly": "jamming signature",
+        "frequency": "2.4 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "CommMonitor-East",
+      "confidenceScore": 0.96,
+      "broadcastOffsetSeconds": 2978,
+      "type": "Comms",
+      "alertId": "SA-0149",
+      "metadata": {
+        "anomaly": "burst pattern",
+        "frequency": "5.0 GHz",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "CyberSensor-West",
+      "confidenceScore": 0.14,
+      "broadcastOffsetSeconds": 2984,
+      "type": "Cyber",
+      "alertId": "SA-0150",
+      "metadata": {
+        "port": "443",
+        "attack": "C2 beacon",
+        "protocol": "TCP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "monitor",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "CyberSensor-Core",
+      "confidenceScore": 0.6,
+      "broadcastOffsetSeconds": 2991,
+      "type": "Cyber",
+      "alertId": "SA-0151",
+      "metadata": {
+        "port": "80",
+        "protocol": "UDP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 7,
+      "correlationGroup": "",
+      "source": "Radar-North",
+      "confidenceScore": 0.06,
+      "broadcastOffsetSeconds": 2996,
+      "type": "Perimeter",
+      "alertId": "SA-0152",
+      "metadata": {
+        "velocity": "26 kts",
+        "trackId": "TRK-0491",
+        "direction": "NNW",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 4,
+      "correlationGroup": "",
+      "source": "CyberSensor-East",
+      "confidenceScore": 0.91,
+      "broadcastOffsetSeconds": 3004,
+      "type": "Cyber",
+      "alertId": "SA-0153",
+      "metadata": {
+        "port": "80",
+        "attack": "C2 beacon",
+        "protocol": "ICMP",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.93,
+      "broadcastOffsetSeconds": 3007,
+      "type": "Sensor",
+      "alertId": "SA-0154",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "vibration",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Alpha-7",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 6,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.09,
+      "broadcastOffsetSeconds": 3012,
+      "type": "Sensor",
+      "alertId": "SA-0155",
+      "metadata": {
+        "magnitude": "high",
+        "reading": "acoustic",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Bravo-3",
+      "groundTruth": {
+        "correctClassification": "critical",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 3,
+      "correlationGroup": "",
+      "source": "WeatherStation-Ridge",
+      "confidenceScore": 0.95,
+      "broadcastOffsetSeconds": 3018,
+      "type": "Environmental",
+      "alertId": "SA-0156",
+      "metadata": {
+        "trigger": "humidity spike",
+        "condition": "clear",
+        "windSpeed": "26 kts",
+        "sourceReliability": "medium"
+      }
+    },
+    {
+      "sector": "Gamma-5",
+      "groundTruth": {
+        "correctClassification": "medium",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 8,
+      "correlationGroup": "",
+      "source": "Radar-North",
+      "confidenceScore": 0.04,
+      "broadcastOffsetSeconds": 3023,
+      "type": "Perimeter",
+      "alertId": "SA-0157",
+      "metadata": {
+        "velocity": "71 kts",
+        "trackId": "TRK-0457",
+        "direction": "SE",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Echo-9",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 2,
+      "correlationGroup": "",
+      "source": "GroundSensor-South",
+      "confidenceScore": 0.98,
+      "broadcastOffsetSeconds": 3026,
+      "type": "Sensor",
+      "alertId": "SA-0158",
+      "metadata": {
+        "magnitude": "low",
+        "reading": "vibration",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Foxtrot-2",
+      "groundTruth": {
+        "correctClassification": "noise",
+        "correctAction": "dismiss",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 5,
+      "correlationGroup": "",
+      "source": "Radar-NorthWest",
+      "confidenceScore": 0.11,
+      "broadcastOffsetSeconds": 3030,
+      "type": "Perimeter",
+      "alertId": "SA-0159",
+      "metadata": {
+        "direction": "NNW",
+        "velocity": "61 kts",
+        "sourceReliability": "high"
+      }
+    },
+    {
+      "sector": "Delta-1",
+      "groundTruth": {
+        "correctClassification": "high",
+        "correctAction": "escalate",
+        "isCompoundMember": false,
+        "compoundGroupId": ""
+      },
+      "rawSeverity": 9,
+      "correlationGroup": "",
+      "source": "WeatherStation-Valley",
+      "confidenceScore": 0.6,
+      "broadcastOffsetSeconds": 3034,
+      "type": "Environmental",
+      "alertId": "SA-0160",
+      "metadata": {
+        "trigger": "wind gust",
+        "condition": "fog",
+        "windSpeed": "53 kts",
+        "sourceReliability": "medium"
+      }
+    }
+  ],
+  "compoundThreats": [
+    {
+      "groupId": "CG-P2-001",
+      "correctEscalatedLevel": "high",
+      "description": "Coordinated perimeter/sensor anomaly in Sector Foxtrot-2 — simultaneous radar and ground disturbance.",
+      "memberAlertIds": [
+        "SA-0059",
+        "SA-0060"
+      ],
+      "correctAction": "escalate",
+      "windowSeconds": 60
+    },
+    {
+      "groupId": "CG-P3-001",
+      "correctEscalatedLevel": "critical",
+      "description": "Multi-vector denial in Sector Alpha-7 — ground sensor, cyber intrusion, and comms jamming.",
+      "memberAlertIds": [
+        "SA-0061",
+        "SA-0062",
+        "SA-0063"
+      ],
+      "correctAction": "escalate",
+      "windowSeconds": 120
+    },
+    {
+      "groupId": "CG-P3-002",
+      "correctEscalatedLevel": "high",
+      "description": "Coordinated multi-sensor infiltration in Sector Delta-1 — no explicit correlation, detected by proximity.",
+      "memberAlertIds": [
+        "SA-0068",
+        "SA-0069",
+        "SA-0070",
+        "SA-0071"
+      ],
+      "correctAction": "escalate",
+      "windowSeconds": 120
+    },
+    {
+      "groupId": "CG-P3-003",
+      "correctEscalatedLevel": "critical",
+      "description": "Sustained cyber assault on Sector Bravo-3 — dual intrusion vectors plus comms disruption.",
+      "memberAlertIds": [
+        "SA-0075",
+        "SA-0076",
+        "SA-0077"
+      ],
+      "correctAction": "escalate",
+      "windowSeconds": 120
+    },
+    {
+      "groupId": "CG-P3-004",
+      "correctEscalatedLevel": "high",
+      "description": "Ground approach and perimeter breach attempt in Sector Foxtrot-2 — implicit pattern, no correlation IDs.",
+      "memberAlertIds": [
+        "SA-0083",
+        "SA-0084",
+        "SA-0085"
+      ],
+      "correctAction": "escalate",
+      "windowSeconds": 120
+    },
+    {
+      "groupId": "CG-P4-001",
+      "correctEscalatedLevel": "critical",
+      "description": "Full-spectrum assault on Sector Gamma-5 — sensor, cyber, and comms under Storm-phase cover.",
+      "memberAlertIds": [
+        "SA-0110",
+        "SA-0112",
+        "SA-0114"
+      ],
+      "correctAction": "escalate",
+      "windowSeconds": 120
+    },
+    {
+      "groupId": "CG-P4-002",
+      "correctEscalatedLevel": "critical",
+      "description": "Rapid multi-domain strike on Sector Echo-9 — high-confidence perimeter breach, cyber intrusion, and ground sensor surge.",
+      "memberAlertIds": [
+        "SA-0136",
+        "SA-0138",
+        "SA-0140"
+      ],
+      "correctAction": "escalate",
+      "windowSeconds": 90
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/ShieldWall.GameMaster/ShieldWall.GameMaster.csproj" />
     <Project Path="src/ShieldWall.Shared/ShieldWall.Shared.csproj" />
     <Project Path="src/ShieldWall.TeamKit/ShieldWall.TeamKit.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ShieldWall.Tests/ShieldWall.Tests.csproj" />
   </Folder>
 </Solution>

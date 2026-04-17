@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <RootNamespace>ShieldWall.GameMaster</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Update="Data\alert-scenario.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShieldWall.Shared\ShieldWall.Shared.csproj" />
+  </ItemGroup>
+</Project>

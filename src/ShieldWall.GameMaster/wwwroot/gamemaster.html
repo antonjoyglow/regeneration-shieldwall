@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shield Wall — Game Master</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0e1a;
+            color: #d0d0d0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ── Login Overlay ─────────────────────────────────── */
+
+        #login-overlay {
+            position: fixed;
+            inset: 0;
+            background: #0a0e1a;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #login-overlay.hidden { display: none; }
+
+        .login-box {
+            background: #12182e;
+            border: 1px solid #1a2744;
+            border-radius: 12px;
+            padding: 48px;
+            width: 380px;
+            text-align: center;
+        }
+
+        .login-box h1 {
+            color: #ffd166;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .login-box p {
+            color: #6c7a96;
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            background: #0a0e1a;
+            border: 1px solid #1a2744;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: #ffd166;
+        }
+
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: #ffd166;
+            color: #0a0e1a;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .login-box button:hover { background: #ffdc85; }
+
+        #login-error {
+            color: #ef476f;
+            font-size: 0.85rem;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* ── Header ────────────────────────────────────────── */
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            background: #0f1428;
+            border-bottom: 2px solid #1a2744;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            color: #ffd166;
+            letter-spacing: 2px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #game-phase-badge {
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .phase-lobby    { background: #1a2744; color: #6c7a96; }
+        .phase-briefing { background: #2d1b69; color: #b794f6; }
+        .phase-live     { background: #065f46; color: #06d6a0; }
+        .phase-paused   { background: #7c4a00; color: #ffd166; }
+        .phase-completed{ background: #4c1d1d; color: #ef476f; }
+
+        #elapsed-timer {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #4cc9f0;
+            min-width: 60px;
+        }
+
+        /* ── Main Layout ───────────────────────────────────── */
+
+        main {
+            display: grid;
+            grid-template-columns: 260px 1fr 300px;
+            grid-template-rows: auto 1fr;
+            gap: 16px;
+            padding: 16px 24px;
+            height: calc(100vh - 54px);
+            min-height: 600px;
+        }
+
+        /* ── Panels ────────────────────────────────────────── */
+
+        .panel {
+            background: #12182e;
+            border: 1px solid #1a2744;
+            border-radius: 8px;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        .panel h2 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6c7a96;
+            margin-bottom: 12px;
+        }
+
+        /* ── Left: Teams Panel ─────────────────────────────── */
+
+        #teams-panel { grid-row: 1 / 3; }
+
+        .team-card {
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            background: #0f1428;
+            border-radius: 6px;
+            border-left: 3px solid #4cc9f0;
+            font-size: 0.85rem;
+        }
+
+        .team-card.disconnected {
+            opacity: 0.5;
+            border-left-color: #444;
+        }
+
+        .team-card .name {
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+
+        .team-card .stats {
+            color: #6c7a96;
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+
+        .team-card .stats span { margin-right: 8px; }
+
+        #team-count-label {
+            font-size: 0.7rem;
+            color: #6c7a96;
+            margin-bottom: 8px;
+        }
+
+        #no-teams {
+            color: #6c7a96;
+            font-style: italic;
+            font-size: 0.8rem;
+            padding: 16px 0;
+            text-align: center;
+        }
+
+        /* ── Center Top: Game Controls ─────────────────────── */
+
+        #controls-panel { grid-column: 2; }
+
+        .control-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .btn:hover { opacity: 0.85; }
+        .btn:active { transform: scale(0.97); }
+        .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .btn-primary   { background: #ffd166; color: #0a0e1a; }
+        .btn-success   { background: #06d6a0; color: #0a0e1a; }
+        .btn-warning   { background: #f77f00; color: #fff; }
+        .btn-danger    { background: #ef476f; color: #fff; }
+        .btn-secondary { background: #1a2744; color: #d0d0d0; }
+
+        /* Announcement area */
+        .announce-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        #announce-input {
+            flex: 1;
+            padding: 10px 14px;
+            background: #0a0e1a;
+            border: 1px solid #1a2744;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 0.85rem;
+        }
+
+        #announce-input:focus {
+            outline: none;
+            border-color: #ffd166;
+        }
+
+        .quick-btns {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .btn-quick {
+            padding: 6px 12px;
+            background: #1a2744;
+            color: #b794f6;
+            border: 1px solid #2d1b69;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .btn-quick:hover { background: #2d1b69; }
+
+        .announce-log {
+            max-height: 100px;
+            overflow-y: auto;
+            font-size: 0.75rem;
+            color: #6c7a96;
+        }
+
+        .announce-log div {
+            padding: 3px 0;
+            border-bottom: 1px solid #0a0e1a;
+        }
+
+        .announce-log .time { color: #4cc9f0; margin-right: 6px; }
+
+        /* Wave controls */
+        .wave-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .phase-dispatch {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .phase-btn-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .phase-btn { font-size: 0.75rem; padding: 6px 10px; }
+        .phase-btn.dispatched { opacity: 0.5; }
+
+        #wave-count {
+            width: 60px;
+            padding: 8px;
+            background: #0a0e1a;
+            border: 1px solid #1a2744;
+            border-radius: 6px;
+            color: #e0e0e0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        #wave-count:focus { outline: none; border-color: #ffd166; }
+
+        .wave-label {
+            color: #6c7a96;
+            font-size: 0.8rem;
+        }
+
+        /* ── Center Bottom: Scoreboard ─────────────────────── */
+
+        #scoreboard-panel { grid-column: 2; }
+
+        .score-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            background: #0f1428;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .score-row:first-child {
+            border-left: 3px solid #ffd166;
+        }
+
+        .score-rank {
+            font-weight: bold;
+            color: #6c7a96;
+            min-width: 32px;
+        }
+
+        .score-name {
+            flex: 1;
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+
+        .score-pct {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #06d6a0;
+            min-width: 70px;
+            text-align: right;
+        }
+
+        .score-meta {
+            color: #6c7a96;
+            font-size: 0.75rem;
+            min-width: 120px;
+        }
+
+        /* ── Right: Alert Queue ────────────────────────────── */
+
+        #alerts-panel { grid-row: 1 / 3; }
+
+        .progress-bar-container {
+            background: #0a0e1a;
+            border-radius: 4px;
+            height: 20px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #065f46, #06d6a0);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            text-shadow: 0 0 3px #0a0e1a;
+        }
+
+        .phase-breakdown {
+            font-size: 0.7rem;
+            color: #6c7a96;
+            margin-bottom: 12px;
+        }
+
+        .phase-breakdown div {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+        }
+
+        .alert-card {
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            background: #0f1428;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            border-left: 3px solid #4cc9f0;
+        }
+
+        .alert-card .alert-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .alert-card .alert-id {
+            color: #4cc9f0;
+            font-weight: 600;
+        }
+
+        .alert-card .alert-offset {
+            color: #6c7a96;
+        }
+
+        .alert-card .alert-details {
+            color: #d0d0d0;
+        }
+
+        .alert-card .ground-truth {
+            margin-top: 4px;
+            padding: 4px 8px;
+            background: rgba(255, 209, 102, 0.1);
+            border-radius: 4px;
+            color: #ffd166;
+            font-size: 0.7rem;
+        }
+
+        .alert-card .compound-badge {
+            display: inline-block;
+            background: #7c4a00;
+            color: #ffd166;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.65rem;
+            margin-left: 6px;
+        }
+
+        #no-upcoming {
+            color: #6c7a96;
+            font-style: italic;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* ── Scrollbar ─────────────────────────────────────── */
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1a2744; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2d3a56; }
+    </style>
+</head>
+<body>
+
+<!-- ── Login Overlay ───────────────────────────────────────── -->
+
+<div id="login-overlay">
+    <div class="login-box">
+        <h1>&#x1F6E1;&#xFE0F; GAME MASTER</h1>
+        <p>Operation Shield Wall — Facilitator Access</p>
+        <input type="text" id="login-user" placeholder="Username" autocomplete="off">
+        <input type="password" id="login-pass" placeholder="Password" autocomplete="off">
+        <button onclick="doLogin()">Authenticate</button>
+        <div id="login-error">Invalid credentials. Try again.</div>
+    </div>
+</div>
+
+<!-- ── Dashboard ───────────────────────────────────────────── -->
+
+<header>
+    <h1>&#x1F6E1;&#xFE0F; SHIELD WALL &mdash; GAME MASTER</h1>
+    <div class="header-right">
+        <span id="elapsed-timer">00:00</span>
+        <span id="game-phase-badge" class="phase-lobby">LOBBY</span>
+    </div>
+</header>
+
+<main>
+    <!-- Left: Teams -->
+    <div id="teams-panel" class="panel">
+        <h2>Teams</h2>
+        <div id="team-count-label">0 connected / 0 registered</div>
+        <div id="team-list">
+            <div id="no-teams">Waiting for teams to connect&hellip;</div>
+        </div>
+    </div>
+
+    <!-- Center Top: Controls -->
+    <div id="controls-panel" class="panel">
+        <h2>Game Controls</h2>
+
+        <div class="control-row" id="lifecycle-buttons">
+            <button class="btn btn-primary" id="btn-briefing" onclick="doBriefing()">Start Briefing</button>
+            <button class="btn btn-success" id="btn-start" onclick="doStart()" disabled>Go Live</button>
+            <button class="btn btn-warning" id="btn-pause" onclick="doPause()" disabled>Pause</button>
+            <button class="btn btn-danger" id="btn-end" onclick="doEnd()" disabled>End Game</button>
+            <button class="btn btn-secondary" id="btn-reset" onclick="doReset()">Reset</button>
+        </div>
+
+        <div class="phase-dispatch" id="phase-dispatch">
+            <span class="wave-label">Dispatch Phase:</span>
+            <div class="phase-btn-group">
+                <button class="btn btn-primary phase-btn" id="btn-phase-1" onclick="doDispatchPhase(1)" disabled>P1: Calm Waters</button>
+                <button class="btn btn-primary phase-btn" id="btn-phase-2" onclick="doDispatchPhase(2)" disabled>P2: Fog of War</button>
+                <button class="btn btn-primary phase-btn" id="btn-phase-3" onclick="doDispatchPhase(3)" disabled>P3: Patterns</button>
+                <button class="btn btn-primary phase-btn" id="btn-phase-4" onclick="doDispatchPhase(4)" disabled>P4: The Storm</button>
+            </div>
+            <span class="wave-label" style="margin-top:6px;">Replay (resets scores):</span>
+            <div class="phase-btn-group">
+                <button class="btn btn-warning phase-btn" id="btn-replay-1" onclick="doReplayPhase(1)" disabled>&#x21BA; P1</button>
+                <button class="btn btn-warning phase-btn" id="btn-replay-2" onclick="doReplayPhase(2)" disabled>&#x21BA; P2</button>
+                <button class="btn btn-warning phase-btn" id="btn-replay-3" onclick="doReplayPhase(3)" disabled>&#x21BA; P3</button>
+                <button class="btn btn-warning phase-btn" id="btn-replay-4" onclick="doReplayPhase(4)" disabled>&#x21BA; P4</button>
+            </div>
+        </div>
+
+        <details class="advanced-wave" style="margin-bottom:12px;">
+            <summary style="color:#6c7a96;font-size:0.8rem;cursor:pointer;">Advanced: Manual Wave</summary>
+            <div class="wave-row" style="margin-top:8px;">
+                <span class="wave-label">Wave:</span>
+                <input type="number" id="wave-count" value="5" min="1" max="50">
+                <button class="btn btn-primary" id="btn-wave" onclick="doWave()" disabled>Send Wave</button>
+            </div>
+        </details>
+
+        <h2>Announcements</h2>
+        <div class="announce-row">
+            <input type="text" id="announce-input" placeholder="Type announcement&hellip;" onkeydown="if(event.key==='Enter')doAnnounce()">
+            <button class="btn btn-primary" onclick="doAnnounce()">Send</button>
+        </div>
+        <div class="quick-btns" id="quick-announcements"></div>
+        <div class="announce-log" id="announce-log"></div>
+    </div>
+
+    <!-- Center Bottom: Scoreboard -->
+    <div id="scoreboard-panel" class="panel">
+        <h2>Live Scoreboard</h2>
+        <div id="scoreboard"></div>
+    </div>
+
+    <!-- Right: Alert Queue -->
+    <div id="alerts-panel" class="panel">
+        <h2>Alert Queue</h2>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+            <div class="progress-label" id="progress-label">0 / 0</div>
+        </div>
+        <div class="phase-breakdown" id="phase-breakdown"></div>
+        <h2>Upcoming (with Ground Truth)</h2>
+        <div id="upcoming-alerts">
+            <div id="no-upcoming">No alerts loaded yet.</div>
+        </div>
+    </div>
+</main>
+
+<script src="js/signalr.min.js"></script>
+<script>
+    "use strict";
+
+    var token = localStorage.getItem("gm-token");
+    var state = {
+        gamePhase: "Lobby",
+        teams: [],
+        teamCount: 0,
+        connectedCount: 0,
+        streamRunning: false,
+        streamPaused: false,
+        currentPhase: null,
+        quickAnnouncements: [],
+        announceHistory: [],
+        upcoming: [],
+        progress: { sent: 0, total: 0, phases: [] }
+    };
+
+    var connection = null;
+    var pollTimer = null;
+    var elapsedTimer = null;
+    var briefingStart = null;
+    var streamStart = null;
+
+    /* ── Helpers ────────────────────────────────────────── */
+
+    function escapeHtml(str) {
+        if (str == null) return "";
+        var div = document.createElement("div");
+        div.textContent = String(str);
+        return div.innerHTML;
+    }
+
+    function authHeaders() {
+        return { "Authorization": "Bearer " + token };
+    }
+
+    async function apiFetch(url, opts) {
+        opts = opts || {};
+        opts.headers = Object.assign({}, opts.headers || {}, authHeaders());
+        var res = await fetch(url, opts);
+        if (res.status === 401) {
+            token = null;
+            localStorage.removeItem("gm-token");
+            document.getElementById("login-overlay").classList.remove("hidden");
+            throw new Error("Unauthorized");
+        }
+        return res;
+    }
+
+    function formatTime(seconds) {
+        var m = Math.floor(seconds / 60);
+        var s = Math.floor(seconds % 60);
+        return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    }
+
+    function now() { return new Date().toLocaleTimeString("en-GB", { hour12: false }); }
+
+    /* ── Auth ──────────────────────────────────────────── */
+
+    async function doLogin() {
+        var user = document.getElementById("login-user").value.trim();
+        var pass = document.getElementById("login-pass").value;
+        var errEl = document.getElementById("login-error");
+
+        try {
+            var res = await fetch("/api/facilitator/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username: user, password: pass })
+            });
+
+            if (!res.ok) {
+                errEl.style.display = "block";
+                return;
+            }
+
+            var data = await res.json();
+            token = data.token;
+            localStorage.setItem("gm-token", token);
+            errEl.style.display = "none";
+            document.getElementById("login-overlay").classList.add("hidden");
+            initDashboard();
+        } catch (e) {
+            errEl.style.display = "block";
+        }
+    }
+
+    /* ── Dashboard Init ────────────────────────────────── */
+
+    async function initDashboard() {
+        await loadConfig();
+        initSignalR();
+        startPolling();
+        startElapsedTimer();
+    }
+
+    async function loadConfig() {
+        try {
+            var res = await apiFetch("/api/facilitator/config");
+            var data = await res.json();
+            state.quickAnnouncements = data.quickAnnouncements || [];
+            renderQuickAnnouncements();
+        } catch (e) { /* ignore */ }
+    }
+
+    /* ── SignalR (spectator) ───────────────────────────── */
+
+    function initSignalR() {
+        if (typeof signalR === "undefined") return;
+
+        try {
+            connection = new signalR.HubConnectionBuilder()
+                .withUrl("/sentinel-hub")
+                .withAutomaticReconnect([0, 2000, 5000, 10000, 30000])
+                .build();
+        } catch (e) { return; }
+
+        connection.on("ReceiveAlert", function () {
+            /* We refresh via polling — but count immediately for responsiveness */
+            state.progress.sent = Math.min(state.progress.sent + 1, state.progress.total);
+            renderProgress();
+        });
+
+        var phaseNames = ["Lobby", "Briefing", "Live", "Paused", "Completed"];
+
+        connection.on("ReceiveGameStateChange", function (phase) {
+            state.gamePhase = phaseNames[phase] || String(phase);
+            renderAll();
+        });
+
+        connection.on("ReceivePhaseChange", function (phase) {
+            state.currentPhase = phase;
+            renderPhase();
+        });
+
+        connection.on("ReceiveAnnouncement", function (msg) {
+            logAnnouncement(msg);
+        });
+
+        connection.start().then(function () {
+            return connection.invoke("JoinWarRoom");
+        }).catch(function (err) {
+            console.warn("SignalR connection failed:", err);
+        });
+    }
+
+    /* ── Polling ───────────────────────────────────────── */
+
+    function startPolling() {
+        pollAll();
+        pollTimer = setInterval(pollAll, 3000);
+    }
+
+    async function pollAll() {
+        try {
+            var res = await fetch("/api/status");
+            var data = await res.json();
+
+            state.gamePhase = data.gamePhase || "Lobby";
+            state.streamRunning = data.streamRunning;
+            state.streamPaused = data.streamPaused;
+            state.currentPhase = data.currentPhase;
+            state.teams = data.connectedTeams || [];
+            state.teamCount = data.teamCount;
+            state.connectedCount = data.connectedCount;
+
+            renderAll();
+        } catch (e) { /* ignore */ }
+
+        if (token) {
+            try {
+                var res2 = await apiFetch("/api/facilitator/alerts/progress");
+                state.progress = await res2.json();
+                renderProgress();
+            } catch (e) { /* ignore */ }
+
+            try {
+                var res3 = await apiFetch("/api/facilitator/alerts/upcoming?count=15");
+                state.upcoming = await res3.json();
+                renderUpcoming();
+            } catch (e) { /* ignore */ }
+        }
+    }
+
+    /* ── Elapsed Timer ─────────────────────────────────── */
+
+    function startElapsedTimer() {
+        elapsedTimer = setInterval(function () {
+            var el = document.getElementById("elapsed-timer");
+            var nowMs = Date.now();
+
+            if (state.gamePhase === "Live" || state.gamePhase === "Paused") {
+                if (!streamStart) streamStart = nowMs;
+                el.textContent = formatTime((nowMs - streamStart) / 1000);
+            } else if (state.gamePhase === "Briefing") {
+                if (!briefingStart) briefingStart = nowMs;
+                el.textContent = formatTime((nowMs - briefingStart) / 1000);
+            } else {
+                el.textContent = "00:00";
+                briefingStart = null;
+                streamStart = null;
+            }
+        }, 1000);
+    }
+
+    /* ── Game Control Actions ──────────────────────────── */
+
+    async function doBriefing() {
+        try {
+            await apiFetch("/api/facilitator/briefing", { method: "POST" });
+            briefingStart = Date.now();
+            await pollAll();
+        } catch (e) { alert("Failed: " + e.message); }
+    }
+
+    async function doStart() {
+        try {
+            await apiFetch("/api/facilitator/start", { method: "POST" });
+            streamStart = Date.now();
+            await pollAll();
+        } catch (e) { alert("Failed: " + e.message); }
+    }
+
+    async function doPause() {
+        try {
+            await apiFetch("/api/facilitator/pause", { method: "POST" });
+            await pollAll();
+        } catch (e) { alert("Failed: " + e.message); }
+    }
+
+    async function doEnd() {
+        if (!confirm("End the game? Scores will be frozen.")) return;
+        try {
+            await apiFetch("/api/facilitator/end", { method: "POST" });
+            await pollAll();
+        } catch (e) { alert("Failed: " + e.message); }
+    }
+
+    async function doReset() {
+        if (!confirm("Reset the entire exercise? All scores and connections will be cleared.")) return;
+        try {
+            await apiFetch("/api/facilitator/reset", { method: "POST" });
+            briefingStart = null;
+            streamStart = null;
+            await pollAll();
+        } catch (e) { alert("Failed: " + e.message); }
+    }
+
+    async function doWave() {
+        var count = parseInt(document.getElementById("wave-count").value, 10) || 5;
+        try {
+            var res = await apiFetch("/api/facilitator/wave/" + count, { method: "POST" });
+            var data = await res.json();
+            logAnnouncement("[WAVE] Dispatched " + data.dispatched + " alerts");
+            await pollAll();
+        } catch (e) { alert("Wave failed: " + e.message); }
+    }
+
+    async function doDispatchPhase(n) {
+        try {
+            var res = await apiFetch("/api/facilitator/phase/" + n + "/dispatch", { method: "POST" });
+            var data = await res.json();
+            logAnnouncement("Dispatched Phase " + n + " (" + data.dispatched + " alerts)");
+            await pollAll();
+        } catch (e) { alert("Dispatch phase " + n + " failed: " + e.message); }
+    }
+
+    async function doReplayPhase(n) {
+        if (!confirm("Replay Phase " + n + " resets ALL team scores. Continue?")) return;
+        try {
+            var res = await apiFetch("/api/facilitator/phase/" + n + "/replay", { method: "POST" });
+            var data = await res.json();
+            logAnnouncement("Replayed Phase " + n + " (" + data.dispatched + " alerts) — scores reset");
+            await pollAll();
+        } catch (e) { alert("Replay phase " + n + " failed: " + e.message); }
+    }
+
+    async function doAnnounce(msg) {
+        var text = msg || document.getElementById("announce-input").value.trim();
+        if (!text) return;
+        try {
+            await apiFetch("/api/facilitator/announce", {
+                method: "POST",
+                body: text
+            });
+            document.getElementById("announce-input").value = "";
+        } catch (e) { alert("Announce failed: " + e.message); }
+    }
+
+    async function doExport() {
+        try {
+            var res = await apiFetch("/api/results/export");
+            var data = await res.json();
+            var blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+            var a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "shieldwall-results.json";
+            a.click();
+        } catch (e) { alert("Export failed: " + e.message); }
+    }
+
+    function logAnnouncement(msg) {
+        state.announceHistory.unshift({ time: now(), text: msg });
+        if (state.announceHistory.length > 50) state.announceHistory.pop();
+        renderAnnounceLog();
+    }
+
+    /* ── Render Functions ──────────────────────────────── */
+
+    function renderAll() {
+        renderPhaseBadge();
+        renderButtons();
+        renderTeams();
+        renderScoreboard();
+        renderPhase();
+    }
+
+    function renderPhaseBadge() {
+        var el = document.getElementById("game-phase-badge");
+        var gp = (state.gamePhase || "Lobby").toUpperCase();
+        el.textContent = gp;
+        el.className = "phase-" + (state.gamePhase || "Lobby").toLowerCase();
+    }
+
+    function renderButtons() {
+        var gp = state.gamePhase || "Lobby";
+        var bb = document.getElementById("btn-briefing");
+        var bs = document.getElementById("btn-start");
+        var bp = document.getElementById("btn-pause");
+        var be = document.getElementById("btn-end");
+        var bw = document.getElementById("btn-wave");
+
+        bb.disabled = gp !== "Lobby";
+        bs.disabled = gp !== "Briefing";
+        bp.disabled = gp !== "Live" && gp !== "Paused";
+        be.disabled = gp !== "Live" && gp !== "Paused";
+        bw.disabled = gp !== "Live" && gp !== "Paused";
+
+        var liveOrPaused = gp === "Live" || gp === "Paused";
+        for (var i = 1; i <= 4; i++) {
+            var dp = document.getElementById("btn-phase-" + i);
+            var rp = document.getElementById("btn-replay-" + i);
+            if (dp) dp.disabled = !liveOrPaused;
+            if (rp) rp.disabled = !liveOrPaused;
+        }
+
+        bp.textContent = gp === "Paused" ? "Resume" : "Pause";
+    }
+
+    function renderTeams() {
+        var el = document.getElementById("team-list");
+        document.getElementById("team-count-label").textContent =
+            state.connectedCount + " connected / " + state.teamCount + " registered";
+
+        if (!state.teams || state.teams.length === 0) {
+            el.innerHTML = '<div id="no-teams">Waiting for teams to connect&hellip;</div>';
+            return;
+        }
+
+        var sorted = state.teams.slice().sort(function (a, b) {
+            return b.missionEffectiveness - a.missionEffectiveness;
+        });
+
+        var html = "";
+        for (var i = 0; i < sorted.length; i++) {
+            var t = sorted[i];
+            html +=
+                '<div class="team-card' + (t.isConnected ? "" : " disconnected") + '">' +
+                '<div class="name">' + (t.isConnected ? "&#x25CF; " : "&#x25CB; ") + escapeHtml(t.teamName) + "</div>" +
+                '<div class="stats">' +
+                '<span>' + (t.missionEffectiveness || 0).toFixed(1) + "%</span>" +
+                '<span>' + (t.alertsProcessed || 0) + " alerts</span>" +
+                '<span>' + (t.averageLatencyMs || 0) + "ms</span>" +
+                "</div></div>";
+        }
+        el.innerHTML = html;
+    }
+
+    function renderScoreboard() {
+        var el = document.getElementById("scoreboard");
+
+        if (!state.teams || state.teams.length === 0) {
+            el.innerHTML = '<div style="color:#6c7a96;font-style:italic;text-align:center;padding:16px;">No scores yet.</div>';
+            return;
+        }
+
+        var sorted = state.teams.slice().sort(function (a, b) {
+            return b.missionEffectiveness - a.missionEffectiveness;
+        });
+
+        var html = "";
+        for (var i = 0; i < sorted.length; i++) {
+            var t = sorted[i];
+            html +=
+                '<div class="score-row">' +
+                '<span class="score-rank">#' + (i + 1) + "</span>" +
+                '<span class="score-name">' + escapeHtml(t.teamName) + "</span>" +
+                '<span class="score-pct">' + (t.missionEffectiveness || 0).toFixed(1) + "%</span>" +
+                '<span class="score-meta">' + (t.alertsProcessed || 0) + " alerts &middot; " +
+                (t.averageLatencyMs || 0) + "ms</span>" +
+                "</div>";
+        }
+
+        if (state.gamePhase === "Completed") {
+            html += '<div style="text-align:center;margin-top:12px;">' +
+                '<button class="btn btn-primary" onclick="doExport()">Export Results JSON</button></div>';
+        }
+
+        el.innerHTML = html;
+    }
+
+    function renderPhase() {
+        /* Render in header — already handled by badge */
+    }
+
+    function renderProgress() {
+        var p = state.progress || { sent: 0, total: 0, phases: [] };
+        var pct = p.total > 0 ? (p.sent / p.total * 100) : 0;
+        document.getElementById("progress-fill").style.width = pct.toFixed(1) + "%";
+        document.getElementById("progress-label").textContent = p.sent + " / " + p.total;
+
+        var bdHtml = "";
+        for (var i = 0; i < (p.phases || []).length; i++) {
+            var ph = p.phases[i];
+            bdHtml += "<div><span>" + escapeHtml(ph.name) + "</span><span>" +
+                ph.sent + " / " + ph.total + "</span></div>";
+        }
+        document.getElementById("phase-breakdown").innerHTML = bdHtml;
+    }
+
+    function renderUpcoming() {
+        var el = document.getElementById("upcoming-alerts");
+
+        if (!state.upcoming || state.upcoming.length === 0) {
+            el.innerHTML = '<div id="no-upcoming">All alerts dispatched.</div>';
+            return;
+        }
+
+        var html = "";
+        for (var i = 0; i < state.upcoming.length; i++) {
+            var a = state.upcoming[i];
+            var mins = Math.floor(a.broadcastOffsetSeconds / 60);
+            var secs = a.broadcastOffsetSeconds % 60;
+            var offsetStr = mins + "m " + secs + "s";
+            var gt = a.groundTruth || {};
+
+            html +=
+                '<div class="alert-card">' +
+                '<div class="alert-header">' +
+                '<span class="alert-id">' + escapeHtml(a.alertId) + "</span>" +
+                '<span class="alert-offset">@' + offsetStr + "</span>" +
+                "</div>" +
+                '<div class="alert-details">' +
+                escapeHtml(a.type) + " &middot; " + escapeHtml(a.sector) +
+                " &middot; Sev " + a.rawSeverity + " &middot; Conf " + (a.confidenceScore * 100).toFixed(0) + "%" +
+                "</div>" +
+                '<div class="ground-truth">' +
+                "&#x1F3AF; " + escapeHtml(gt.classification) + " / " + escapeHtml(gt.action);
+
+            if (gt.isCompoundMember) {
+                html += '<span class="compound-badge">&#x26A0; ' + escapeHtml(gt.compoundGroupId) + "</span>";
+            }
+
+            html += "</div></div>";
+        }
+        el.innerHTML = html;
+    }
+
+    function renderQuickAnnouncements() {
+        var el = document.getElementById("quick-announcements");
+        var html = "";
+        for (var i = 0; i < state.quickAnnouncements.length; i++) {
+            var msg = state.quickAnnouncements[i];
+            html += '<button class="btn-quick" title="' + escapeHtml(msg) +
+                '" onclick="doAnnounce(\'' + escapeHtml(msg).replace(/'/g, "\\'") + '\')">' +
+                escapeHtml(msg.length > 40 ? msg.substring(0, 37) + "..." : msg) + "</button>";
+        }
+        el.innerHTML = html;
+    }
+
+    function renderAnnounceLog() {
+        var el = document.getElementById("announce-log");
+        var html = "";
+        for (var i = 0; i < Math.min(state.announceHistory.length, 20); i++) {
+            var entry = state.announceHistory[i];
+            html += '<div><span class="time">' + escapeHtml(entry.time) +
+                "</span>" + escapeHtml(entry.text) + "</div>";
+        }
+        el.innerHTML = html;
+    }
+
+    /* ── Bootstrap ─────────────────────────────────────── */
+
+    document.addEventListener("DOMContentLoaded", function () {
+        if (token) {
+            /* Verify token is still valid */
+            fetch("/api/facilitator/config", { headers: authHeaders() })
+                .then(function (res) {
+                    if (res.ok) {
+                        document.getElementById("login-overlay").classList.add("hidden");
+                        initDashboard();
+                    }
+                })
+                .catch(function () { /* show login */ });
+        }
+
+        document.getElementById("login-pass").addEventListener("keydown", function (e) {
+            if (e.key === "Enter") doLogin();
+        });
+    });
+</script>
+</body>
+</html>
