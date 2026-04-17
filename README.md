@@ -1,4 +1,4 @@
-# 🛡️ Operation Shield Wall — Team Kit
+# 🛡️ Operation Shield Wall
 
 ## Prerequisites
 
@@ -22,34 +22,133 @@ dotnet --version
 
 ---
 
-## Quick Start
+## Project Structure
 
-1. **Set your team name** — edit `src/ShieldWall.TeamKit/appsettings.json`:
-   ```json
-   {
-     "Team": { "Name": "YourTeamName" }
-   }
-   ```
-
-2. **Build and run**:
-   ```bash
-   dotnet run --project src/ShieldWall.TeamKit
-   ```
-
-3. **Open your browser**: http://localhost:5200
-
-4. **Verify connection**: You should see `● Connected — YourTeamName` in green at the top.
-
-5. **Your mission**: Improve the 3 files in `src/ShieldWall.TeamKit/Services/`:
-   - `AlertClassifier.cs` — Classify incoming threat alerts
-   - `PatternDetector.cs` — Detect compound threat patterns
-   - `ResponseEngine.cs` — Decide the response action
-
-> **Hot reload**: Save your changes, stop with `Ctrl+C`, re-run `dotnet run`.
-> Your team stays registered — the server remembers you.
+```
+ShieldWall/
+├── ShieldWall.slnx                        ← Solution file (all 4 projects)
+│
+├── src/
+│   ├── ShieldWall.GameMaster/             ← Game server — run this first
+│   │   ├── Data/
+│   │   │   └── alert-scenario.json        ← 160 alerts across 4 phases
+│   │   ├── Hubs/
+│   │   │   └── SentinelHub.cs             ← SignalR hub
+│   │   ├── Services/                      ← Scoring, orchestration, streaming
+│   │   ├── wwwroot/
+│   │   │   ├── gamemaster.html            ← Facilitator control panel
+│   │   │   └── warroom.html               ← Live war room scoreboard
+│   │   └── appsettings.json               ← CORS, credentials, scenario path
+│   │
+│   ├── ShieldWall.Shared/                 ← Read only — do not modify
+│   │   ├── Enums/                         ← ThreatLevel, ActionType, AlertType, GamePhase
+│   │   ├── Interfaces/                    ← IAlertClassifier, IPatternDetector, IResponseEngine
+│   │   └── Models/                        ← SentinelAlert, ClassifiedAlert, ThreatPattern, etc.
+│   │
+│   └── ShieldWall.TeamKit/                ← YOUR WORKSPACE
+│       ├── Services/
+│       │   ├── AlertClassifier.cs         ← ★ IMPLEMENT THIS ★
+│       │   ├── PatternDetector.cs         ← ★ IMPLEMENT THIS ★
+│       │   ├── ResponseEngine.cs          ← ★ IMPLEMENT THIS ★
+│       │   ├── AlertPipeline.cs           ← Already wired — do not modify
+│       │   └── SentinelConnection.cs      ← Already wired — do not modify
+│       ├── Components/
+│       │   ├── Pages/
+│       │   │   └── Home.razor             ← Mission briefing + alert feed
+│       │   └── Shared/
+│       │       ├── ScorePanel.razor       ← Live Mission Effectiveness score
+│       │       ├── AlertFeed.razor        ← Incoming alert stream
+│       │       └── ConnectionBadge.razor  ← Connection status indicator
+│       └── appsettings.json              ← Set your team name here
+│
+└── tests/
+    └── ShieldWall.Tests/
+        ├── TeamKit/                       ← Tests for classifier and response engine
+        ├── Scoring/                       ← Tests for classification, action, latency scoring
+        ├── Scenario/                      ← Tests for alert stream engine and scenario loader
+        ├── Orchestrator/                  ← Tests for game orchestration
+        └── Models/                        ← Tests for shared model contracts
+```
 
 ---
-# 🛡️ OPERATION SHIELD WALL
+
+## Running Locally
+
+### Step 1 — Clone and set your team name
+
+```bash
+git clone https://github.com/antonjoyglow/regeneration-shieldwall.git
+cd regeneration-shieldwall
+```
+
+Edit `src/ShieldWall.TeamKit/appsettings.json` and set your team name:
+
+```json
+{
+  "Team": { "Name": "YourTeamName" }
+}
+```
+
+### Step 2 — Start the GameMaster (terminal 1)
+
+```bash
+dotnet run --project src/ShieldWall.GameMaster
+```
+
+GameMaster starts at **http://localhost:5100**
+
+| URL | Purpose |
+|-----|---------|
+| `http://localhost:5100/gamemaster.html` | Facilitator control panel (start/pause/replay phases) |
+| `http://localhost:5100/warroom.html` | Live team scoreboard for the room |
+
+> **GameMaster credentials:** username `shieldwall`, password `tactical2026`
+
+### Step 3 — Start your TeamKit (terminal 2)
+
+```bash
+dotnet run --project src/ShieldWall.TeamKit
+```
+
+TeamKit opens at **http://localhost:5200**
+
+You should see **`● Connected — YourTeamName`** in green at the top within a few seconds. If not, make sure the GameMaster is running.
+
+### Step 4 — Start coding
+
+Open the three files in `src/ShieldWall.TeamKit/Services/` and implement your logic:
+
+- `AlertClassifier.cs` — classify each incoming alert into a `ThreatLevel`
+- `PatternDetector.cs` — detect compound threat patterns across the alert history
+- `ResponseEngine.cs` — decide the `ActionType` for each classified alert
+
+After every change: stop TeamKit with `Ctrl+C`, re-run `dotnet run --project src/ShieldWall.TeamKit`. Your team registration persists — the GameMaster remembers you.
+
+**Or use hot reload** to skip the restart cycle:
+
+```bash
+dotnet watch --project src/ShieldWall.TeamKit
+```
+
+---
+
+## Running Tests
+
+```bash
+dotnet test
+```
+
+The test suite covers the scoring engine, scenario loader, stream engine, and includes templates for your classifier and response engine:
+
+| Folder | What it tests |
+|--------|---------------|
+| `TeamKit/` | `AlertClassifier` and `ResponseEngine` (extend these!) |
+| `Scoring/` | Classification accuracy, action scoring, latency multipliers |
+| `Scenario/` | Alert stream dispatch, phase management, scenario loading |
+| `Orchestrator/` | Game lifecycle and phase transitions |
+| `Models/` | Shared model contracts |
+
+---
 
 ## Mission Brief
 
@@ -60,41 +159,6 @@ Threats are going unclassified. Patterns are being missed. The control room is b
 Four field teams have been activated. Your mission: **build the Threat Assessment Engine** — the logic that processes incoming alerts, scores their severity, detects compound threat patterns, and recommends response actions.
 
 The War Room is watching. Your Mission Effectiveness score updates live. You have **60 minutes**.
-
----
-
-## Quick Start
-
-```bash
-# 1. Clone the repo and switch to your team branch
-git clone <REPO_URL>
-cd operation-shield-wall
-git checkout team/<your-team-name>
-
-# 2. Run the setup
-dotnet run --project ShieldWall.TeamKit -- setup
-
-# 3. Your dashboard opens at http://localhost:5100
-#    You should see "Connected to Sentinel Grid" in the status panel.
-
-# 4. Wait for the facilitator to start the alert stream.
-
-# 5. Open your code and start implementing:
-#    ShieldWall.TeamKit/Services/AlertClassifier.cs
-#    ShieldWall.TeamKit/Services/PatternDetector.cs
-#    ShieldWall.TeamKit/Services/ResponseEngine.cs
-```
-
-**Hot reload:** Use `dotnet watch` instead of `dotnet run` so your dashboard restarts automatically when you save code changes.
-
-```bash
-dotnet watch --project ShieldWall.TeamKit
-```
-
-**Run tests:**
-```bash
-dotnet test
-```
 
 ---
 
@@ -245,41 +309,25 @@ Each team presents ~7 minutes to the command room. Suggested structure:
 
 ## Project Structure
 
+> See the full structure at the top of this document.
+
+The three files you need to implement are in `src/ShieldWall.TeamKit/Services/`:
+
 ```
-ShieldWall/
-├── ShieldWall.GameMaster/          ← Runs on the server (don't modify)
-├── ShieldWall.Shared/              ← Models and interfaces (read, don't modify)
-│   ├── Models/
-│   │   ├── SentinelAlert.cs        ← The alert data model
-│   │   ├── ClassifiedAlert.cs      ← Your classification output
-│   │   ├── ThreatPattern.cs        ← Your pattern detection output
-│   │   ├── ResponseAction.cs       ← Your response decision output
-│   │   └── Enums.cs                ← ThreatLevel, AlertType, ActionType
-│   └── Interfaces/
-│       ├── IAlertClassifier.cs     ← Interface you implement
-│       ├── IPatternDetector.cs     ← Interface you implement
-│       └── IResponseEngine.cs      ← Interface you implement
-│
-├── ShieldWall.TeamKit/             ← YOUR WORKSPACE
-│   ├── Services/
-│   │   ├── AlertClassifier.cs      ← ★ IMPLEMENT THIS ★
-│   │   ├── PatternDetector.cs      ← ★ IMPLEMENT THIS ★
-│   │   ├── ResponseEngine.cs       ← ★ IMPLEMENT THIS ★
-│   │   ├── SentinelConnection.cs   ← SignalR client (already wired)
-│   │   ├── AlertPipeline.cs        ← Processing pipeline (already wired)
-│   │   └── AlertHistoryBuffer.cs   ← Stores last 50 alerts (already wired)
-│   ├── Components/
-│   │   └── Pages/
-│   │       ├── Dashboard.razor     ← Main dashboard (already built)
-│   │       └── HeroPanel.razor     ← Placeholder for your additions
-│   └── wwwroot/                    ← Static assets, CSS
-│
-├── ShieldWall.Tests/               ← Write your tests here
-│   ├── ClassifierTests.cs          ← Template with example test structure
-│   ├── PatternDetectorTests.cs
-│   └── ResponseEngineTests.cs
-│
-└── ShieldWall.sln
+src/ShieldWall.TeamKit/Services/
+├── AlertClassifier.cs      ← ★ IMPLEMENT THIS ★
+├── PatternDetector.cs      ← ★ IMPLEMENT THIS ★
+├── ResponseEngine.cs       ← ★ IMPLEMENT THIS ★
+├── AlertPipeline.cs        ← Already wired — do not modify
+└── SentinelConnection.cs   ← Already wired — do not modify
+```
+
+Test templates are in `tests/ShieldWall.Tests/TeamKit/`:
+
+```
+tests/ShieldWall.Tests/TeamKit/
+├── AlertClassifierTests.cs
+└── ResponseEngineTests.cs
 ```
 
 ---
@@ -288,10 +336,11 @@ ShieldWall/
 
 | Command | Purpose |
 |---------|---------|
-| `dotnet watch --project ShieldWall.TeamKit` | Run with hot reload |
-| `dotnet run --project ShieldWall.TeamKit` | Run without hot reload |
-| `dotnet test` | Run your unit tests |
-| `dotnet build` | Build without running |
+| `dotnet run --project src/ShieldWall.GameMaster` | Start the GameMaster server |
+| `dotnet run --project src/ShieldWall.TeamKit` | Run your TeamKit dashboard |
+| `dotnet watch --project src/ShieldWall.TeamKit` | Run TeamKit with hot reload |
+| `dotnet test` | Run all tests |
+| `dotnet build` | Build the full solution |
 | `git add -A && git commit -m "message" && git push` | Save your work |
 
 ---
