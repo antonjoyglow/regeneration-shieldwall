@@ -207,20 +207,31 @@ public sealed class ScoringEngine(
         double alertTotal = (classificationScore * 0.6) + (actionScore * 0.4);
 
         // ── Latency multiplier ────────────────────────────────────────────────
-        double latencyMs = 0;
-        double latencyMultiplier = 1.0;
+        // Use the client-measured processing duration (monotonic Stopwatch) so that
+        // network transit time and clock skew do not penalise remote candidates.
+        // Fall back to cross-clock subtraction only when the client sends 0 (legacy).
+        double latencyMs;
 
-        if (_alertBroadcastTimes.TryGetValue(decision.AlertId, out var broadcastTime))
+        if (decision.ProcessingDurationMs > 0)
         {
-            latencyMs = (decision.ProcessedAt - broadcastTime).TotalMilliseconds;
-            latencyMultiplier = latencyMs switch
-            {
-                < 500 => 1.0,
-                < 2000 => 0.9,
-                < 5000 => 0.7,
-                _ => 0.5
-            };
+            latencyMs = decision.ProcessingDurationMs;
         }
+        else if (_alertBroadcastTimes.TryGetValue(decision.AlertId, out var broadcastTime))
+        {
+            latencyMs = Math.Max(0, (decision.ProcessedAt - broadcastTime).TotalMilliseconds);
+        }
+        else
+        {
+            latencyMs = 0;
+        }
+
+        double latencyMultiplier = latencyMs switch
+        {
+            < 500 => 1.0,
+            < 2000 => 0.9,
+            < 5000 => 0.7,
+            _ => 0.5
+        };
 
         double finalScore = alertTotal * latencyMultiplier;
 

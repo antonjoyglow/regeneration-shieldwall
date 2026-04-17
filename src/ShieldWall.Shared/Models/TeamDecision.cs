@@ -18,6 +18,13 @@ public record TeamDecision
     /// <summary>The team's chosen response action for the classified alert.</summary>
     public required ResponseAction Response { get; init; }
 
-    /// <summary>UTC timestamp when the team completed processing this alert.</summary>
+    /// <summary>UTC timestamp when the team completed processing this alert (diagnostic only — not used for scoring).</summary>
     public required DateTime ProcessedAt { get; init; }
+
+    /// <summary>
+    /// Client-measured processing duration in milliseconds (monotonic clock).
+    /// Covers only the classify → detect → decide pipeline, excluding network transit.
+    /// The server uses this for the latency multiplier instead of cross-clock subtraction.
+    /// </summary>
+    public double ProcessingDurationMs { get; init; }
 }

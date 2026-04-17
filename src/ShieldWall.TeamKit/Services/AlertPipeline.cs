@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using ShieldWall.Shared.Interfaces;
 using ShieldWall.Shared.Models;
 
@@ -25,6 +26,8 @@ public sealed class AlertPipeline(
     {
         try
         {
+            var stopwatch = Stopwatch.StartNew();
+
             var classified = classifier.Classify(alert);
 
             List<ClassifiedAlert> history;
@@ -39,13 +42,16 @@ public sealed class AlertPipeline(
             var patterns = patternDetector.Detect(history);
             var response = responseEngine.Decide(classified, patterns);
 
+            stopwatch.Stop();
+
             var decision = new TeamDecision
             {
                 AlertId = alert.AlertId,
                 Classification = classified,
                 Patterns = patterns.AsReadOnly(),
                 Response = response,
-                ProcessedAt = DateTime.UtcNow
+                ProcessedAt = DateTime.UtcNow,
+                ProcessingDurationMs = stopwatch.Elapsed.TotalMilliseconds
             };
 
             await connection.SubmitDecisionAsync(decision, CancellationToken.None);
